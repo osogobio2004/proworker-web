@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 class="mb-4" style="color: #4A3022;">Servicios Destacados</h2>
+    <div class="row">
+        {% for tecnico in tecnicos %}
+        <div class="col-md-4">
+            <div class="card mb-3 shadow-sm" style="border-top: 4px solid #9D8DF1;"> <div class="card-body">
+                    <h5 class="card-title">{{ tecnico.usuario.username }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ tecnico.categoria.nombre }}</h6>
+                    <p class="card-text">{{ tecnico.experiencia }}</p>
+                    <button class="btn btn-sm text-white" style="background-color: #9D8DF1;">Contactar</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
