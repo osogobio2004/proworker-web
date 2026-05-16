@@ -4,18 +4,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}ProWorker - La red de confianza{% endblock %}</title>
+    <title>{% block title %}ProWorker | La red de confianza{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        /* Variables de color de la marca */
+        :root {
+            --color-fondo: #F8F9FA; /* Hueso muy claro */
+            --color-primario: #2C3E50; /* Azul oscuro/Gris corporativo */
+            --color-acento: #0d6efd; /* Azul de los botones */
+        }
+        body {
+            background-color: var(--color-fondo);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
 </head>
-<body style="background-color: #F4F1EA;"> <nav class="navbar navbar-expand-lg" style="background-color: #4A3022;"> <div class="container">
-            <a class="navbar-brand text-white fw-bold" href="#">ProWorker</a>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="background-color: var(--color-primario);">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">
+                <i class="bi bi-tools me-2"></i>ProWorker
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contacto</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-light btn-sm mt-1" href="#">Iniciar Sesión</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
-    <div class="container mt-4">
+    <main>
         {% block content %}
         {% endblock %}
-    </div>
+    </main>
+
+    <footer class="text-white py-4 mt-5" style="background-color: var(--color-primario);">
+        <div class="container text-center">
+            <p class="mb-1">© 2026 ProWorker Soluciones Digitales S.A. de C.V.</p>
+            <small class="text-white-50">Desarrollado por OLMEKA Software & Services</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
