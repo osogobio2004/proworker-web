@@ -1,13 +1,7 @@
 from django.shortcuts import render
 
 def index(request):
-    # 🟢 CONTROL DE ROL SIMULADO: cambia por 'invitado', 'cliente' o 'tecnico'
-    # Cambia este valor para probar cómo reacciona dinámicamente tu Header
-    rol_simulado = 'invitado' 
-    contexto = {
-        'rol': rol_simulado
-    }
-    return render(request, 'servicios/home.html', contexto)
+    return render(request, 'servicios/home.html')
 
 def vista_login(request):
     return render(request, 'registration/login.html')

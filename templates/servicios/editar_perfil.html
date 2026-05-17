@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card p-5 shadow-sm border-0">
+                <h3 class="fw-bold mb-4 text-center" style="color: var(--color-primario);">Mi Oficina Digital</h3>
+                <p class="text-muted text-center mb-4">Configura tu perfil profesional portable para recibir solicitudes locales.</p>
+                
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Especialidad Técnica</label>
+                            <select class="form-select">
+                                <option>Electricidad</option>
+                                <option>Fontanería</option>
+                                <option>Climatización</option>
+                                <option>Limpieza</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Municipio de Cobertura Principal</label>
+                            <select class="form-select">
+                                <option>Centro (Villahermosa)</option>
+                                <option>Cárdenas</option>
+                                <option>Huimanguillo</option>
+                                <option>Comalcalco</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Teléfono de Enlace Corporativo (WhatsApp)</label>
+                        <input type="tel" class="form-control" placeholder="Ej. 9931234567" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Presentación Pública de tus Servicios</label>
+                        <textarea class="form-control" rows="4" placeholder="Describe tu experiencia, certificaciones y garantías de trabajo..." required></textarea>
+                    </div>
+                    <button class="btn btn-primary w-100 btn-lg shadow-sm" style="background-color: var(--color-acento);">Guardar Perfil Profesional</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

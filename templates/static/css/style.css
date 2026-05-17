@@ -1,16 +1,17 @@
-/* Variables Globales de la Marca */
+/* Variables de Color de la Marca */
 :root {
-    --color-fondo: #F8F9FA;      /* Fondo hueso claro y limpio */
-    --color-primario: #2C3E50;   /* Azul oscuro / Gris corporativo */
-    --color-acento: #0d6efd;     /* Azul de botones de acción */
-    --color-lavanda: #9D8DF1;    /* Acento secundario morado */
+    --color-fondo: #F5F5F7;      /* Gris hueso ultra-limpio estilo Apple */
+    --color-primario: #2C3E50;   /* Gris oscuro corporativo */
+    --color-acento: #0071E3;     /* Azul brillante característico de Apple */
+    --color-exito: #34C759;      /* Verde suave institucional */
 }
 
-/* Tipografía de Alta Calidad Estilo Apple */
+/* Tipografía e Identidad Visual */
 body {
     background-color: var(--color-fondo);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     letter-spacing: -0.022em;
+    color: #1D1D1F;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -20,37 +21,39 @@ main {
     flex: 1;
 }
 
-/* Tarjetas Premium Estilo Apple */
+/* Contenedores y Tarjetas Estilo Apple */
 .card {
-    border-radius: 14px !important;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04) !important;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03) !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     background-color: #ffffff;
     border: none !important;
 }
 
 .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08) !important;
 }
 
-/* Campos de Formularios Refinados */
+/* Formularios Refinados */
 .form-control, .form-select {
-    border-radius: 8px;
-    border: 1px solid #ced4da;
-    padding: 0.65rem 0.75rem;
+    border-radius: 10px;
+    border: 1px solid #D2D2D7;
+    padding: 0.75rem 1rem;
     font-size: 0.95rem;
+    background-color: #FBFBFD;
 }
 
 .form-control:focus, .form-select:focus {
     border-color: var(--color-acento);
-    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.12);
+    box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.15);
+    background-color: #ffffff;
 }
 
-/* Botones Redondeados Modernos */
+/* Botones con Bordes Suaves */
 .btn {
-    border-radius: 8px;
-    padding: 0.6rem 1.4rem;
+    border-radius: 10px;
+    padding: 0.65rem 1.5rem;
     font-weight: 500;
     transition: all 0.2s ease;
 }

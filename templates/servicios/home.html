@@ -1,75 +1,54 @@
 {% extends "base.html" %}
-{% load static %}
 
 {% block content %}
-<div class="position-relative text-center text-white d-flex align-items-center justify-content-center rounded-4 overflow-hidden shadow-sm mb-5" 
-     style="height: 55vh; background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1000&auto=format&fit=crop') center/cover;">
-    <div class="container p-4">
-        <h1 class="display-4 fw-bold mb-3">La red de confianza para servicios</h1>
-        <p class="lead mb-4">Conectamos profesionales verificados con tus necesidades en Tabasco.</p>
-        <a href="{% url 'catalogo' %}" class="btn btn-primary btn-lg me-2 px-4 shadow">Buscar un Servicio</a>
-        <a href="{% url 'registro' %}" class="btn btn-outline-light btn-lg px-4 shadow">Soy Técnico</a>
-    </div>
-</div>
-
 <div class="container mt-4">
+    <div class="position-relative text-center text-white d-flex align-items-center justify-content-center rounded-4 overflow-hidden shadow-sm mb-5" 
+         style="height: 55vh; background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1000&auto=format&fit=crop') center/cover;">
+        <div class="container p-4">
+            <h1 class="display-4 fw-bold mb-3 text-white">La red de confianza para servicios</h1>
+            <p class="lead mb-4 text-white-50">Conectamos profesionales verificados con tus necesidades en Tabasco.</p>
+            <a href="{% url 'catalogo' %}" class="btn btn-primary btn-lg me-2 px-4 shadowfw-bold" style="background-color: #0071E3; border-color: #0071E3;">Buscar un Servicio</a>
+            <a href="{% url 'registro' %}" class="btn btn-outline-light btn-lg px-4 shadow">Soy Técnico</a>
+        </div>
+    </div>
+
     <div class="text-center mb-5">
-        <h2 class="fw-bold" style="color: var(--color-primario);">Nuestros Servicios</h2>
-        <p class="text-muted">Encuentra especialistas locales listos para ayudarte.</p>
+        <h2 class="fw-bold text-dark">Nuestros Servicios técnicos</h2>
+        <p class="text-muted">Profesionales capacitados en las áreas de mayor demanda en la región.</p>
     </div>
 
-    <div class="row g-4">
+    <div class="row g-4 mb-5">
         <div class="col-md-3 col-sm-6">
-            <div class="card h-100 text-center border-0 p-3">
+            <div class="card h-100 text-center border p-4 shadow-sm">
                 <div class="card-body">
-                    <i class="bi bi-lightning-charge display-5 text-warning mb-3"></i>
-                    <h5 class="card-title fw-bold">Electricidad</h5>
+                    <i class="bi bi-lightning-charge display-4 text-warning mb-3"></i>
+                    <h5 class="fw-bold text-dark">Electricidad</h5>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
-            <div class="card h-100 text-center border-0 p-3">
+            <div class="card h-100 text-center border p-4 shadow-sm">
                 <div class="card-body">
-                    <i class="bi bi-droplet display-5 text-info mb-3"></i>
-                    <h5 class="card-title fw-bold">Fontanería</h5>
+                    <i class="bi bi-droplet display-4 text-info mb-3"></i>
+                    <h5 class="fw-bold text-dark">Fontanería</h5>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
-            <div class="card h-100 text-center border-0 p-3">
+            <div class="card h-100 text-center border p-4 shadow-sm">
                 <div class="card-body">
-                    <i class="bi bi-snow display-5 text-primary mb-3"></i>
-                    <h5 class="card-title fw-bold">Climatización</h5>
+                    <i class="bi bi-snow display-4 text-primary mb-3"></i>
+                    <h5 class="fw-bold text-dark">Climatización</h5>
                 </div>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
-            <div class="card h-100 text-center border-0 p-3">
+            <div class="card h-100 text-center border p-4 shadow-sm">
                 <div class="card-body">
-                    <i class="bi bi-stars display-5 text-success mb-3"></i>
-                    <h5 class="card-title fw-bold">Limpieza</h5>
+                    <i class="bi bi-stars display-4 text-success mb-3"></i>
+                    <h5 class="fw-bold text-dark">Limpieza</h5>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-
-<div class="container mt-5 py-5 border-top border-light">
-    <div class="row text-center g-4">
-        <div class="col-md-4">
-            <i class="bi bi-shield-check display-5 text-primary mb-2"></i>
-            <h4 class="fw-bold">Perfiles Verificados</h4>
-            <p class="text-muted small">Evaluaciones auténticas e historiales revisados contra fraude.</p>
-        </div>
-        <div class="col-md-4">
-            <i class="bi bi-clock-history display-5 text-primary mb-2"></i>
-            <h4 class="fw-bold">Inmediatez Real</h4>
-            <p class="text-muted small">Reduce drásticamente tus horas muertas de búsqueda en redes sociales.</p>
-        </div>
-        <div class="col-md-4">
-            <i class="bi bi-person-badge display-5 text-primary mb-2"></i>
-            <h4 class="fw-bold">Dignificación Profesional</h4>
-            <p class="text-muted small">Convertimos el oficio informal en una ocupación digital confiable.</p>
         </div>
     </div>
 </div>
