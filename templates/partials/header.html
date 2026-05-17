@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="background-color: #2C3E50 !important;">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-white" href="{% url 'index' %}">
+            <i class="bi bi-tools me-2"></i>ProWorker
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'index' %}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'nosotros' %}">Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'contacto' %}">Contacto</a>
+                </li>
+
+                {% if rol == 'invitado' %}
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary btn-sm my-1 text-white px-3 shadow-sm" href="{% url 'login' %}" style="background-color: #0d6efd; border-color: #0d6efd;">Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="nav-link text-white-50" href="{% url 'registro' %}">Registrarse</a>
+                    </li>
+
+                {% elif rol == 'cliente' %}
+                    <li class="nav-item ms-lg-3">
+                        <a class="nav-link fw-bold text-info" href="{% url 'historial_cliente' %}">
+                            <i class="bi bi-list-task me-1"></i>Mis Solicitudes
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-danger btn-sm mt-1 ms-lg-2 text-white" href="#">Cerrar Sesión</a>
+                    </li>
+
+                {% elif rol == 'tecnico' %}
+                    <li class="nav-item ms-lg-3">
+                        <a class="nav-link fw-bold text-success" href="{% url 'dashboard_tecnico' %}">
+                            <i class="bi bi-speedometer2 me-1"></i>Panel Técnico
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-danger btn-sm mt-1 ms-lg-2 text-white" href="#">Cerrar Sesión</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

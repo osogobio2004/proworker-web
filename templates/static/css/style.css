@@ -1,0 +1,56 @@
+/* Variables Globales de la Marca */
+:root {
+    --color-fondo: #F8F9FA;      /* Fondo hueso claro y limpio */
+    --color-primario: #2C3E50;   /* Azul oscuro / Gris corporativo */
+    --color-acento: #0d6efd;     /* Azul de botones de acción */
+    --color-lavanda: #9D8DF1;    /* Acento secundario morado */
+}
+
+/* Tipografía de Alta Calidad Estilo Apple */
+body {
+    background-color: var(--color-fondo);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    letter-spacing: -0.022em;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+/* Tarjetas Premium Estilo Apple */
+.card {
+    border-radius: 14px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04) !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    background-color: #ffffff;
+    border: none !important;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Campos de Formularios Refinados */
+.form-control, .form-select {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    padding: 0.65rem 0.75rem;
+    font-size: 0.95rem;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--color-acento);
+    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.12);
+}
+
+/* Botones Redondeados Modernos */
+.btn {
+    border-radius: 8px;
+    padding: 0.6rem 1.4rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}

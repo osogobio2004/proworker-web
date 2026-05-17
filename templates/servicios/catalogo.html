@@ -1,98 +1,51 @@
 {% extends "base.html" %}
 
-{% block title %}Catálogo de Servicios | ProWorker{% endblock %}
+{% block title %}Catálogo de Especialistas | ProWorker{% endblock %}
 
 {% block content %}
-<div class="container mt-5 mb-5">
-    <div class="row mb-5 align-items-center">
+<div class="container mt-4">
+    <div class="row mb-5 align-items-center bg-white p-4 rounded-4 shadow-sm border border-light">
         <div class="col-md-4 mb-3 mb-md-0">
-            <h2 class="fw-bold mb-0" style="color: var(--color-primario);">Encuentra un Técnico</h2>
-            <p class="text-muted mb-0">Resultados disponibles en tu zona</p>
+            <h3 class="fw-bold mb-1" style="color: var(--color-primario);">Buscar Especialistas</h3>
+            <p class="text-muted small mb-0">Resultados localizados para mitigar gastos de traslado.</p>
         </div>
-        
         <div class="col-md-8">
-            <form class="row g-2 bg-white p-3 shadow-sm rounded border" method="GET" action="">
+            <form class="row g-2">
                 <div class="col-md-5">
-                    <select class="form-select" name="oficio">
-                        <option value="" selected>Todos los oficios</option>
-                        <option value="electricidad">Electricidad</option>
-                        <option value="fontaneria">Fontanería</option>
-                        <option value="climatizacion">Climatización</option>
-                        <option value="limpieza">Limpieza</option>
+                    <select class="form-select">
+                        <option>Todos los oficios</option>
+                        <option>Electricidad</option>
+                        <option>Fontanería</option>
+                        <option>Climatización</option>
+                        <option>Limpieza</option>
                     </select>
                 </div>
                 <div class="col-md-5">
-                    <select class="form-select" name="municipio">
-                        <option value="" selected>Cualquier Municipio</option>
-                        <option value="centro">Centro (Villahermosa)</option>
-                        <option value="cardenas">Cárdenas</option>
-                        <option value="huimanguillo">Huimanguillo</option>
-                        <option value="comalcalco">Comalcalco</option>
-                        <option value="macuspana">Macuspana</option>
+                    <select class="form-select">
+                        <option>Cualquier Municipio</option>
+                        <option>Centro (Villahermosa)</option>
+                        <option>Cárdenas</option>
+                        <option>Huimanguillo</option>
+                        <option>Comalcalco</option>
                     </select>
                 </div>
                 <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary w-100"><i class="bi bi-search"></i> Buscar</button>
+                    <button class="btn btn-primary w-100 shadow-sm" style="background-color: var(--color-acento);"><i class="bi bi-search"></i></button>
                 </div>
             </form>
         </div>
     </div>
 
     <div class="row g-4">
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="card h-100 shadow-sm border-0">
-                <div class="card-body text-center p-4">
-                    <div class="mx-auto bg-light text-secondary rounded-circle d-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                        <i class="bi bi-person-fill display-5"></i>
-                    </div>
-                    <h5 class="fw-bold mb-1">Carlos Mendoza</h5>
-                    <span class="badge bg-primary mb-2">Climatización</span>
-                    
-                    <div class="text-warning mb-2 small">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i> <span class="text-muted">(4.5)</span>
-                    </div>
-                    
-                    <p class="text-muted small mb-3"><i class="bi bi-geo-alt-fill text-danger me-1"></i> Centro, Tabasco</p>
-                    <a href="{% url 'perfil_tecnico' %}" class="btn btn-outline-primary btn-sm w-100">Ver Perfil</a>
+        <div class="col-md-4">
+            <div class="card text-center p-4">
+                <div class="mx-auto bg-light rounded-circle d-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                    <i class="bi bi-person-fill display-5 text-secondary"></i>
                 </div>
-            </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="card h-100 shadow-sm border-0">
-                <div class="card-body text-center p-4">
-                    <div class="mx-auto bg-light text-secondary rounded-circle d-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                        <i class="bi bi-person-fill display-5"></i>
-                    </div>
-                    <h5 class="fw-bold mb-1">Ana Ruiz</h5>
-                    <span class="badge bg-info mb-2">Fontanería</span>
-                    
-                    <div class="text-warning mb-2 small">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i> <span class="text-muted">(5.0)</span>
-                    </div>
-                    
-                    <p class="text-muted small mb-3"><i class="bi bi-geo-alt-fill text-danger me-1"></i> Cárdenas, Tabasco</p>
-                    <a href="{% url 'perfil_tecnico' %}" class="btn btn-outline-primary btn-sm w-100">Ver Perfil</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="card h-100 shadow-sm border-0">
-                <div class="card-body text-center p-4">
-                    <div class="mx-auto bg-light text-secondary rounded-circle d-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                        <i class="bi bi-person-fill display-5"></i>
-                    </div>
-                    <h5 class="fw-bold mb-1">Luis Pérez</h5>
-                    <span class="badge bg-warning text-dark mb-2">Electricidad</span>
-                    
-                    <div class="text-warning mb-2 small">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i> <span class="text-muted">(4.0)</span>
-                    </div>
-                    
-                    <p class="text-muted small mb-3"><i class="bi bi-geo-alt-fill text-danger me-1"></i> Huimanguillo, Tabasco</p>
-                    <a href="{% url 'perfil_tecnico' %}" class="btn btn-outline-primary btn-sm w-100">Ver Perfil</a>
-                </div>
+                <h5 class="fw-bold mb-1">Carlos Mendoza</h5>
+                <span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-20 mb-2 px-3 py-1">Climatización</span>
+                <p class="text-muted small mb-3"><i class="bi bi-geo-alt-fill text-danger me-1"></i> Centro, Tabasco</p>
+                <a href="{% url 'perfil_tecnico' %}" class="btn btn-outline-primary btn-sm w-100 mt-2">Ver Perfil Técnico</a>
             </div>
         </div>
     </div>
