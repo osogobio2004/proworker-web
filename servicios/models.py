@@ -15,3 +15,16 @@ class PerfilTecnico(models.Model):
 
     def __str__(self):
         return self.usuario.username
+    
+class SolicitudServicio(models.Model):
+    descripcion = models.TextField()
+    fecha = models.DateField()
+    horario = models.CharField(max_length=50)
+    direccion = models.CharField(max_length=255)
+    referencias = models.CharField(max_length=255, blank=True, null=True)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    cliente = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    estatus = models.CharField(max_length=20, default='Pendiente')
+
+    def __str__(self):
+        return f"Cita para el {self.fecha} - {self.horario}"

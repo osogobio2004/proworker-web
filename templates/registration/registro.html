@@ -6,28 +6,29 @@
         <div class="col-md-6">
             <div class="card p-5 shadow-sm border-0">
                 <h3 class="fw-bold mb-4 text-center" style="color: var(--color-primario);">Registrar Nueva Cuenta</h3>
-                <form method="POST">
+                <form method="POST" action="">
                     {% csrf_token %}
-                    <div class="mb-4 p-3 bg-light rounded-3 border">
-                        <label class="form-label fw-bold" style="color: var(--color-primario);">¿Cómo deseas usar ProWorker?</label>
-                        <select class="form-select border-primary" name="tipo_usuario" required>
-                            <option value="cliente">Quiero buscar y contratar técnicos (Cliente)</option>
-                            <option value="tecnico">Quiero postularme para ofrecer servicios (Técnico)</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold">Nombre de Usuario</label>
-                        <input type="text" class="form-control" placeholder="Ej. maria_tabasco" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold">Correo Electrónico</label>
-                        <input type="email" class="form-control" placeholder="ejemplo@correo.com" required>
-                    </div>
-                    <div class="mb-4">
-                        <label class="form-label fw-semibold">Contraseña de Seguridad</label>
-                        <input type="password" class="form-control" placeholder="********" required>
-                    </div>
-                    <button class="btn btn-primary w-100 shadow-sm" style="background-color: var(--color-acento);">Completar Registro</button>
+                    
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success shadow-sm">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+
+                    {% for field in form %}
+                        <div class="mb-3 text-dark text-start">
+                            <label class="form-label fw-semibold small">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.help_text %}
+                                <div class="form-text small text-muted" style="font-size: 0.75rem;">{{ field.help_text }}</div>
+                            {% endif %}
+                            {% for error in field.errors %}
+                                <div class="text-danger small fw-bold">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                    
+                    <button type="submit" class="btn btn-primary w-100 text-white fw-bold shadow-sm py-2 mt-2" style="background-color: #0071E3 !important; border-color: #0071E3 !important;">Completar Registro Oficial</button>
                 </form>
             </div>
         </div>

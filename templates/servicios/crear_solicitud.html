@@ -5,32 +5,40 @@
     <div class="row justify-content-center">
         <div class="col-md-7">
             <div class="card p-5 shadow-sm border-0">
-                <h3 class="fw-bold mb-4" style="color: var(--color-primario);">Nueva Orden de Trabajo</h3>
-                <form method="POST">
+                <h3 class="fw-bold mb-4" style="color: #2C3E50;">Nueva Orden de Trabajo</h3>
+                <form method="POST" action="">
                     {% csrf_token %}
+                    
                     <div class="mb-4">
-                        <label class="form-label fw-semibold">Falla técnica detectada</label>
-                        <textarea class="form-control" rows="4" placeholder="Describe detalladamente el problema con tu equipo..." required></textarea>
+                        <label for="descripcion" class="form-label fw-semibold">Falla técnica detectada</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion" rows="4" placeholder="Describe detalladamente el problema con tu equipo..." required></textarea>
                     </div>
+                    
                     <div class="row mb-4">
                         <div class="col-6">
-                            <label class="form-label fw-semibold">Fecha propuesta</label>
-                            <input type="date" class="form-control" required>
+                            <label for="fecha" class="form-label fw-semibold">Fecha propuesta</label>
+                            <input type="date" class="form-control" id="fecha" name="fecha" required>
                         </div>
                         <div class="col-6">
-                            <label class="form-label fw-semibold">Preferencia horaria</label>
-                            <select class="form-select">
-                                <option>Matutino (8:00 AM - 12:00 PM)</option>
-                                <option>Vespertino (12:00 PM - 5:00 PM)</option>
+                            <label for="horario" class="form-label fw-semibold">Preferencia horaria</label>
+                            <select class="form-select" id="horario" name="horario" required>
+                                <option value="Matutino (8:00 AM - 12:00 PM)">Matutino (8:00 AM - 12:00 PM)</option>
+                                <option value="Vespertino (12:00 PM - 5:00 PM)">Vespertino (12:00 PM - 5:00 PM)</option>
                             </select>
                         </div>
                     </div>
+                    
                     <div class="p-3 bg-light rounded-3 mb-4 border">
                         <h6 class="fw-bold mb-3 text-dark"><i class="bi bi-geo-alt-fill text-danger d-inline me-2"></i>Dirección Física del Problema</h6>
-                        <input type="text" class="form-control mb-2" placeholder="Calle, Número, Colonia o Fraccionamiento" required>
-                        <input type="text" class="form-control" placeholder="Referencias de fachada (ej. Portón negro)">
+                        <div class="mb-2">
+                            <input type="text" class="form-control" name="direccion" placeholder="Calle, Número, Colonia o Fraccionamiento" required>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" name="referencias" placeholder="Referencias de la fachada (ej. Portón negro)">
+                        </div>
                     </div>
-                    <button class="btn btn-success w-100 btn-lg shadow-sm" style="background-color: var(--color-exito); border-color: var(--color-exito);">Enviar Solicitud Directa</button>
+                    
+                    <button type="submit" class="btn btn-success w-100 btn-lg text-white fw-bold shadow-sm" style="background-color: #34C759 !important; border-color: #34C759 !important;">Enviar Solicitud Directa</button>
                 </form>
             </div>
         </div>

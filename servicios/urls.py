@@ -13,4 +13,7 @@ urlpatterns = [
     path('mis-servicios/', views.historial_cliente, name='historial_cliente'),
     path('mi-perfil/', views.editar_perfil, name='editar_perfil'),
     path('dashboard/', views.dashboard_tecnico, name='dashboard_tecnico'),
+    path('aceptar-trabajo/<int:id>/', views.aceptar_trabajo, name='aceptar_trabajo'),
+    path('rechazar-trabajo/<int:id>/', views.rechazar_trabajo, name='rechazar_trabajo'),
+    path('logout/', views.vista_logout, name='logout'),
 ]

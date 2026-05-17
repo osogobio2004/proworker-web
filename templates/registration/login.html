@@ -9,17 +9,26 @@
                     <i class="bi bi-person-circle display-4 text-primary" style="color: var(--color-acento) !important;"></i>
                     <h3 class="fw-bold mt-2" style="color: var(--color-primario);">Iniciar Sesión</h3>
                 </div>
-                <form method="POST">
+                <form method="POST" action="">
                     {% csrf_token %}
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-danger">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Usuario o Alias</label>
-                        <input type="text" class="form-control" placeholder="Ej. carlos_mendoza" required>
+                        <input type="text" name="username" class="form-control" placeholder="Escribe tu usuario" required>
                     </div>
+
                     <div class="mb-4">
                         <label class="form-label fw-semibold">Contraseña</label>
-                        <input type="password" class="form-control" placeholder="********" required>
+                        <input type="password" name="password" class="form-control" placeholder="••••" required>
                     </div>
-                    <button class="btn btn-primary w-100 shadow-sm" style="background-color: var(--color-acento);">Entrar al Sistema</button>
+
+                    <button type="submit" class="btn btn-primary w-100 text-white fw-bold shadow-sm" style="background-color: #0071E3 !important; border-color: #0071E3 !important;">Entrar al Sistema</button>
                 </form>
             </div>
         </div>

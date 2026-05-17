@@ -9,20 +9,34 @@
         </div>
         <a href="{% url 'editar_perfil' %}" class="btn btn-outline-secondary btn-sm"><i class="bi bi-gear me-1"></i>Configurar Datos</a>
     </div>
-
-    <div class="card border-start border-primary border-4 p-4 mb-4 shadow-sm">
+    {% for solicitud in solicitudes %}
+    <div class="card border-start border-warning border-4 p-4 mb-4 shadow-sm">
         <div class="row align-items-center">
             <div class="col-md-8">
-                <span class="badge bg-primary mb-2 px-3 py-1">¡Nueva Petición de Servicio!</span>
-                <h5 class="fw-bold mt-2">Cliente: María López</h5>
-                <p class="mb-2 text-dark"><strong>Falla reportada:</strong> "El minisplit de la recámara principal enciende pero no inyecta aire frío, solo ambiente."</p>
-                <p class="small text-muted mb-0"><i class="bi bi-geo-alt-fill text-danger me-1"></i>Col. Atasta, Villahermosa (Ref: Frente a la farmacia).</p>
+                <span class="badge bg-warning text-dark mb-2 px-3 py-1">¡Nueva Petición de Servicio!</span>
+                <p class="mb-2 text-dark"><strong>Falla reportada:</strong> "{{ solicitud.descripcion }}"</p>
+                <p class="small text-muted mb-1"><i class="bi bi-calendar me-1"></i> {{ solicitud.fecha }} - {{ solicitud.horario }}</p>
+                <p class="small text-muted mb-0"><i class="bi bi-geo-alt-fill text-danger me-1"></i>{{ solicitud.direccion }}</p>
             </div>
             <div class="col-md-4 text-md-end mt-3 mt-md-0">
-                <button class="btn btn-success w-100 mb-2 shadow-sm" style="background-color: var(--color-exito); border-color: var(--color-exito);"><i class="bi bi-check-lg me-1"></i> Aceptar</button>
-                <button class="btn btn-outline-danger w-100"><i class="bi bi-x-lg"></i> Rechazar</button>
+                <form action="{% url 'aceptar_trabajo' solicitud.id %}" method="POST" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success w-100 mb-2 shadow-sm" style="background-color: #34C759 !important; border-color: #34C759 !important;"><i class="bi bi-check-lg me-1"></i> Aceptar Trabajo</button>
+                </form>
+                
+                <form action="{% url 'rechazar_trabajo' solicitud.id %}" method="POST" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger w-100"><i class="bi bi-x-lg"></i> Rechazar</button>
+                </form>
             </div>
         </div>
+    </div>
+    {% empty %}
+    <div class="text-center py-5">
+        <i class="bi bi-cup-hot display-4 text-muted"></i>
+        <p class="text-muted mt-3">No hay solicitudes nuevas por el momento. ¡Tómate un descanso!</p>
+    </div>
+    {% endfor %}
     </div>
 </div>
 {% endblock %}
