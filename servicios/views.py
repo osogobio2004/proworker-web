@@ -4,8 +4,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages 
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
-from .forms import FormularioRegistroCustom
-from .models import PerfilTecnico
+from .forms import FormularioRegistroCustom, EditarPerfilForm
+from .models import SolicitudServicio, PerfilTecnico, PerfilUsuario
 
 ROL_ACTUAL = 'invitado' 
 
@@ -145,3 +145,35 @@ def vista_login(request):
 def vista_logout(request):
     auth_logout(request)
     return redirect('index')
+
+@login_required
+def mi_cuenta(request):
+    perfil, created = PerfilUsuario.objects.get_or_create(user=request.user)
+    
+    if request.method == 'POST':
+        form = EditarPerfilForm(request.POST, request.FILES, instance=perfil)
+        if form.is_valid():
+            # Guardamos datos del User
+            user = request.user
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
+            user.email = form.cleaned_data['email']
+            user.save()
+            # Guardamos datos del Perfil (foto)
+            form.save()
+            messages.success(request, "¡Tu perfil ha sido actualizado!")
+            return redirect('mi_cuenta')
+    else:
+        form = EditarPerfilForm(instance=perfil)
+    
+    return render(request, 'servicios/mi_cuenta.html', {'form': form})
+
+def catalogo(request):
+    if not request.user.is_authenticated:
+        messages.info(request, "Inicia sesión para ver nuestro catálogo de expertos.")
+        return redirect('login')
+    
+    if request.user.is_staff:
+        return redirect('dashboard_tecnico')
+        
+    return render(request, 'servicios/catalogo.html')

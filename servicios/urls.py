@@ -16,4 +16,5 @@ urlpatterns = [
     path('aceptar-trabajo/<int:id>/', views.aceptar_trabajo, name='aceptar_trabajo'),
     path('rechazar-trabajo/<int:id>/', views.rechazar_trabajo, name='rechazar_trabajo'),
     path('logout/', views.vista_logout, name='logout'),
+    path('mi-cuenta/', views.mi_cuenta, name='mi_cuenta')
 ]

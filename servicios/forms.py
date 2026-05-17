@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from .models import PerfilUsuario
 
 class FormularioRegistroCustom(UserCreationForm):
     nombre_completo = forms.CharField(
@@ -60,3 +61,19 @@ class FormularioRegistroCustom(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
         fields = UserCreationForm.Meta.fields + ('email',)
+
+class EditarPerfilForm(forms.ModelForm):
+    first_name = forms.CharField(max_length=100, label="Nombre(s)")
+    last_name = forms.CharField(max_length=100, label="Apellidos")
+    email = forms.EmailField(label="Correo Electrónico")
+
+    class Meta:
+        model = PerfilUsuario
+        fields = ['foto_perfil', 'biografia']
+
+    def __init__(self, *args, **kwargs):
+        super(EditarPerfilForm, self).__init__(*args, **kwargs)
+        if self.instance and self.instance.user:
+            self.fields['first_name'].initial = self.instance.user.first_name
+            self.fields['last_name'].initial = self.instance.user.last_name
+            self.fields['email'].initial = self.instance.user.email

@@ -29,3 +29,11 @@ class SolicitudServicio(models.Model):
 
     def __str__(self):
         return f"Cita para el {self.fecha} - {self.horario}"
+
+class PerfilUsuario(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='perfil')
+    foto_perfil = models.ImageField(upload_to='perfiles/', default='perfiles/default.png', null=True, blank=True)
+    biografia = models.TextField(max_length=500, blank=True)
+
+    def __str__(self):
+        return f"Perfil de {self.user.username}"
