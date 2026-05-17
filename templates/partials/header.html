@@ -15,10 +15,10 @@
                     <a class="nav-link" href="{% url 'index' %}">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Nosotros</a>
+                    <a class="nav-link" href="{% url 'nosotros' %}">Nosotros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contacto</a>
+                    <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-warning fw-semibold" href="{% url 'catalogo' %}"><i class="bi bi-search me-1"></i>Catálogo</a>
@@ -29,19 +29,15 @@
                 
                 {% if request.user.is_superuser %}
                     <li class="nav-item">
-                        <a class="btn btn-outline-danger btn-sm fw-bold shadow-sm" href="/admin/" target="_blank"><i class="bi bi-shield-lock me-1"></i>Panel Admin</a>
+                        <a class="btn btn-outline-danger btn-sm fw-bold shadow-sm" href="/admin/" target="_blank"><i class="bi bi-shield-lock me-1"></i>Panel admin</a>
                     </li>
                 {% elif request.user.is_staff %}
                     <li class="nav-item bg-dark rounded-3 px-2 py-1 border border-secondary d-flex gap-2">
-                        <a class="nav-link text-success p-1 small fw-bold" href="{% url 'dashboard_tecnico' %}"><i class="bi bi-speedometer2 me-1"></i>Bandeja de Trabajo</a>
-                        <span class="text-secondary align-self-center">|</span>
-                        <a class="nav-link text-success p-1 small" href="{% url 'editar_perfil' %}"><i class="bi bi-person-gear"></i> Perfil</a>
+                        <a class="nav-link text-success p-1 small fw-bold" href="{% url 'dashboard_tecnico' %}"><i class="bi bi-speedometer2 me-1"></i>Bandeja de trabajo</a>
                     </li>
                 {% elif request.user.is_authenticated %}
                     <li class="nav-item bg-dark rounded-3 px-2 py-1 border border-secondary d-flex gap-2">
-                        <a class="nav-link text-info p-1 small fw-bold" href="{% url 'historial_cliente' %}"><i class="bi bi-briefcase me-1"></i>Mis Solicitudes</a>
-                        <span class="text-secondary align-self-center">|</span>
-                        <a class="nav-link text-info p-1 small" href="{% url 'crear_solicitud' %}"><i class="bi bi-calendar-plus"></i> Agendar</a>
+                        <a class="nav-link text-info p-1 small fw-bold" href="{% url 'historial_cliente' %}"><i class="bi bi-briefcase me-1"></i>Mis solicitudes</a>
                     </li>
                 {% endif %}
 
@@ -50,15 +46,15 @@
                 {% if request.user.is_authenticated %}
                     <li class="nav-item d-flex align-items-center gap-2">
                         {% if request.user.is_staff %}
-                            <a class="btn btn-success btn-sm text-white px-3 shadow-sm fw-bold" href="{% url 'dashboard_tecnico' %}"><i class="bi bi-person-circle me-1"></i>Mi Cuenta </a>
+                            <a class="btn btn-success btn-sm text-white px-3 shadow-sm fw-bold" href="{% url 'dashboard_tecnico' %}"><i class="bi bi-person-circle me-1"></i>Mi cuenta </a>
                         {% else %}
-                            <a class="btn btn-info btn-sm text-white px-3 shadow-sm fw-bold" href="{% url 'editar_perfil' %}"><i class="bi bi-person-circle me-1"></i>Mi Cuenta</a>
+                            <a class="btn btn-info btn-sm text-white px-3 shadow-sm fw-bold" href="{% url 'editar_perfil' %}"><i class="bi bi-person-circle me-1"></i>Mi cuenta</a>
                         {% endif %}
                         <a class="btn btn-outline-light btn-sm" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i></a>
                     </li>
                 {% else %}
                     <li class="nav-item d-flex align-items-center gap-2">
-                        <a class="btn btn-primary btn-sm text-white px-4 shadow-sm" href="{% url 'login' %}">Iniciar Sesión</a>
+                        <a class="btn btn-primary btn-sm text-white px-4 shadow-sm" href="{% url 'login' %}">Iniciar sesión</a>
                         <a class="nav-link text-light small" href="{% url 'registro' %}">Registrarse</a>
                     </li>
                 {% endif %}

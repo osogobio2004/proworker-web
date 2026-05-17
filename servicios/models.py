@@ -12,6 +12,7 @@ class PerfilTecnico(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True)
     telefono = models.CharField(max_length=15)
     experiencia = models.TextField(help_text="Breve descripción de los servicios.")
+    foto_trabajo = models.ImageField(upload_to='trabajos_tecnicos/', null=True, blank=True)
 
     def __str__(self):
         return self.usuario.username
