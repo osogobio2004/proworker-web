@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Solicitar Servicio | ProWorker{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            
+            <div class="d-flex align-items-center mb-4 p-3 bg-white shadow-sm rounded border">
+                <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 60px; height: 60px;">
+                    <i class="bi bi-person-fill fs-3"></i>
+                </div>
+                <div>
+                    <h5 class="fw-bold mb-0">Carlos Mendoza</h5>
+                    <span class="text-muted small">Técnico en Climatización</span>
+                </div>
+                <div class="ms-auto">
+                    <span class="badge bg-primary fs-6">Paso Final</span>
+                </div>
+            </div>
+
+            <div class="card shadow-sm border-0" style="border-top: 4px solid var(--color-acento);">
+                <div class="card-body p-4 p-md-5">
+                    <h3 class="fw-bold mb-4" style="color: var(--color-primario);">Detalles de tu solicitud</h3>
+                    
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        
+                        <div class="mb-4">
+                            <label for="descripcion" class="form-label fw-semibold">Describe el problema o servicio que necesitas <span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="descripcion" name="descripcion" rows="4" placeholder="Ej. Mi minisplit marca LG no enfría, solo tira aire ambiente. Ya verifiqué los filtros." required></textarea>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label for="fecha" class="form-label fw-semibold">Fecha deseada <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="fecha" name="fecha" required>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label for="horario" class="form-label fw-semibold">Horario de preferencia</label>
+                                <select class="form-select" id="horario" name="horario">
+                                    <option value="manana">Mañana (8:00 AM - 12:00 PM)</option>
+                                    <option value="tarde">Tarde (12:00 PM - 5:00 PM)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-4 p-3 bg-light rounded border">
+                            <h6 class="fw-bold mb-3"><i class="bi bi-geo-alt-fill text-danger me-2"></i>Ubicación del Servicio</h6>
+                            <div class="mb-3">
+                                <label for="direccion" class="form-label fw-semibold">Dirección exacta <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Calle, Número, Colonia, Código Postal" required>
+                            </div>
+                            <div>
+                                <label for="referencias" class="form-label fw-semibold">Referencias para llegar</label>
+                                <input type="text" class="form-control" id="referencias" name="referencias" placeholder="Ej. Casa de dos pisos frente al parque">
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-success btn-lg shadow-sm">
+                                <i class="bi bi-send-check me-2"></i>Enviar Solicitud al Técnico
+                            </button>
+                        </div>
+                        <div class="text-center mt-3">
+                            <small class="text-muted">El técnico recibirá tu solicitud y te confirmará la visita a la brevedad.</small>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -17,3 +17,22 @@ def about(request):
 
 def contact(request):
     return render(request, 'servicios/contact.html')
+
+def perfil_tecnico(request):
+    return render(request, 'servicios/detalles_tecnico.html')
+
+def catalogo(request):
+    return render(request, 'servicios/catalogo.html')
+
+def crear_solicitud(request):
+    return render(request, 'servicios/crear_solicitud.html')
+
+def historial_cliente(request):
+    return render(request, 'servicios/historial_cliente.html')
+
+def editar_perfil(request):
+    return render(request, 'servicios/editar_perfil.html')
+
+def dashboard_tecnico(request):
+    return render(request, 'servicios/dashboard_tecnico.html')
+

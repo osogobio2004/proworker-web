@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Mi Bandeja de Trabajo | ProWorker{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    
+    <div class="row align-items-center mb-4">
+        <div class="col-md-8">
+            <h2 class="fw-bold mb-1" style="color: var(--color-primario);">Hola, Carlos Mendoza</h2>
+            <p class="text-muted"><i class="bi bi-geo-alt-fill text-danger"></i> Técnico Activo en Zona Centro</p>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <a href="{% url 'editar_perfil' %}" class="btn btn-outline-secondary btn-sm"><i class="bi bi-pencil-square me-1"></i>Editar mi perfil</a>
+        </div>
+    </div>
+
+    <div class="row mb-5 g-3">
+        <div class="col-md-4">
+            <div class="card bg-primary text-white border-0 shadow-sm h-100">
+                <div class="card-body p-4 text-center">
+                    <h5 class="mb-0">Nuevas Solicitudes</h5>
+                    <h1 class="display-4 fw-bold mb-0">1</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-success text-white border-0 shadow-sm h-100">
+                <div class="card-body p-4 text-center">
+                    <h5 class="mb-0">Trabajos Finalizados</h5>
+                    <h1 class="display-4 fw-bold mb-0">12</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-warning text-dark border-0 shadow-sm h-100">
+                <div class="card-body p-4 text-center">
+                    <h5 class="mb-0">Mi Calificación</h5>
+                    <h1 class="display-4 fw-bold mb-0">4.5 <i class="bi bi-star-fill fs-3"></i></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="fw-bold mb-4" style="color: var(--color-primario);">Bandeja de Solicitudes</h4>
+    
+    <div class="card shadow-sm border-0 border-start border-primary border-4 mb-3">
+        <div class="card-body p-4">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="badge bg-primary">¡Nueva!</span>
+                        <small class="text-muted">Recibida hace 2 horas</small>
+                    </div>
+                    <h5 class="fw-bold">Cliente: María López</h5>
+                    <p class="mb-2"><strong>Problema:</strong> "Mi minisplit marca LG no enfría, solo tira aire ambiente. Ya verifiqué los filtros."</p>
+                    <p class="mb-2"><i class="bi bi-calendar-event text-primary me-2"></i><strong>Fecha sugerida:</strong> Lunes 18 de Mayo, por la Tarde</p>
+                    <p class="mb-0"><i class="bi bi-geo-alt text-danger me-2"></i><strong>Dirección:</strong> Calle Juárez #123, Col. Atasta (Referencia: Frente a la farmacia).</p>
+                </div>
+                <div class="col-md-4 mt-3 mt-md-0 border-start border-2 border-light text-center">
+                    <p class="fw-semibold mb-2">¿Aceptas el servicio?</p>
+                    <button class="btn btn-success w-100 mb-2"><i class="bi bi-check-circle me-1"></i> Aceptar Trabajo</button>
+                    <button class="btn btn-outline-danger w-100"><i class="bi bi-x-circle me-1"></i> Rechazar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0 border-start border-success border-4 opacity-75">
+        <div class="card-body p-4">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <span class="badge bg-success mb-2">Trabajo en curso</span>
+                    <h5 class="fw-bold text-muted">Cliente: Roberto Sánchez</h5>
+                    <p class="mb-0 text-muted">Mantenimiento preventivo a 2 equipos de ventana.</p>
+                </div>
+                <div class="col-md-4 mt-3 mt-md-0 text-md-end">
+                    <button class="btn btn-outline-success"><i class="bi bi-flag-fill me-1"></i> Marcar como Finalizado</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Perfil de Técnico | ProWorker{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <a href="{% url 'index' %}" class="btn btn-link link-dark p-0 mb-4 text-decoration-none">
+        <i class="bi bi-arrow-left me-2"></i>Volver al inicio
+    </a>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 text-center p-4">
+                <div class="mx-auto bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center mb-3" style="width: 120px; height: 120px;">
+                    <i class="bi bi-person-fill display-3"></i>
+                </div>
+                <h4 class="fw-bold mb-1" style="color: var(--color-primario);">Carlos Mendoza</h4>
+                <span class="badge bg-primary mb-3 px-3 py-2 fs-6">Técnico en Climatización</span>
+                
+                <div class="mb-3 text-warning">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                    <span class="text-muted small ms-2">(4.5 / 5)</span>
+                </div>
+                
+                <hr class="w-100">
+                
+                <div class="text-start w-100 px-2">
+                    <p class="mb-2"><strong><i class="bi bi-geo-alt me-2 text-primary"></i>Zona:</strong> Villahermosa (Centro)</p>
+                    <p class="mb-2"><strong><i class="bi bi-telephone me-2 text-primary"></i>Teléfono:</strong> +52 993 555 0123</p>
+                    <p class="mb-0"><strong><i class="bi bi-check-circle-fill me-2 text-success"></i>Identidad:</strong> Verificada</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0 p-5 bg-white mb-4">
+                <h4 class="fw-bold mb-3" style="color: var(--color-primario);">Sobre mis servicios</h4>
+                <p class="text-muted">Especialista con más de 5 años de experiencia en instalación, mantenimiento y reparación de aires acondicionados residenciales y comerciales (Minisplits y de ventana). Garantía por escrito en cada trabajo.</p>
+                
+                <h5 class="fw-bold mt-4 mb-3" style="color: var(--color-primario);">Servicios comunes</h5>
+                <ul class="list-group list-group-flush mb-4">
+                    <li class="list-group-item px-0"><i class="bi bi-check2 text-primary me-2"></i>Mantenimiento preventivo (Lavado a presión)</li>
+                    <li class="list-group-item px-0"><i class="bi bi-check2 text-primary me-2"></i>Recarga de gas refrigerante (R22 / R410)</li>
+                    <li class="list-group-item px-0"><i class="bi bi-check2 text-primary me-2"></i>Diagnóstico y reparación de tarjetas electrónicas</li>
+                </ul>
+
+                <div class="p-3 bg-light rounded border d-flex align-items-center justify-content-between">
+                    <div>
+                        <h6 class="fw-bold mb-1">¿Necesitas este servicio?</h6>
+                        <small class="text-muted">Al dar clic te conectarás directamente de forma segura.</small>
+                    </div>
+                    <a href="https://wa.me/529935550123" target="_blank" class="btn btn-success px-4 shadow-sm">
+                        <a href="{% url 'crear_solicitud' %}" class="btn btn-success px-4 shadow-sm">
+                            <i class="bi bi-calendar-check me-2"></i>Contratar Servicio
+                        </a>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
