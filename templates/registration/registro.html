@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Crear Cuenta | ProWorker{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6"> <div class="card shadow border-0" style="border-top: 4px solid var(--color-acento);">
+                <div class="card-body p-5">
+                    
+                    <div class="text-center mb-4">
+                        <i class="bi bi-person-plus display-4" style="color: var(--color-primario);"></i>
+                        <h2 class="fw-bold mt-2" style="color: var(--color-primario);">Únete a ProWorker</h2>
+                        <p class="text-muted">Crea tu cuenta gratis en menos de un minuto</p>
+                    </div>
+
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        
+                        <div class="mb-4 p-3 bg-light rounded border">
+                            <label for="tipo_usuario" class="form-label fw-bold" style="color: var(--color-primario);">¿Qué deseas hacer en ProWorker?</label>
+                            <select class="form-select border-primary" id="tipo_usuario" name="tipo_usuario" required>
+                                <option value="" disabled selected>Selecciona una opción...</option>
+                                <option value="cliente">Quiero buscar y contratar servicios (Cliente)</option>
+                                <option value="tecnico">Quiero ofrecer mis servicios (Socio Técnico)</option>
+                            </select>
+                            <div class="form-text">Esto nos ayudará a configurar tu perfil correctamente.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="username" class="form-label fw-semibold">Nombre de Usuario</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Ej. maria_lopez99" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-semibold">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="tu@correo.com" required>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="password" class="form-label fw-semibold">Contraseña</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="********" required>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label for="password_confirm" class="form-label fw-semibold">Confirmar Contraseña</label>
+                                <input type="password" class="form-control" id="password_confirm" name="password_confirm" placeholder="********" required>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg shadow-sm">Crear Cuenta</button>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <p class="text-muted mb-0">¿Ya tienes una cuenta?</p>
+                            <a href="{% url 'login' %}" class="text-decoration-none fw-bold" style="color: var(--color-acento);">Inicia sesión aquí</a>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
