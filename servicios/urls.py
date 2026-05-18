@@ -18,4 +18,5 @@ urlpatterns = [
     path('logout/', views.vista_logout, name='logout'),
     path('mi-cuenta/', views.mi_cuenta, name='mi_cuenta'),
     path('tecnico/<int:id>/', views.detalle_tecnico, name='detalle_tecnico'),
+    path('agenda/', views.agenda_tecnico, name='agenda_tecnico'),
 ]

@@ -55,7 +55,6 @@
         display: none;
     }
 
-    /* Botón visual para cargar archivos */
     .upload-trigger-btn {
         background-color: #FFFFFF;
         color: var(--txt-main, #111827);
@@ -150,7 +149,6 @@
     }
 
     function clearPhoto() {
-        // Busca el checkbox de borrado que Django genera y lo marca
         const clearCheckbox = document.querySelector('input[type="checkbox"][name="foto_perfil-clear"]');
         if (clearCheckbox) {
             clearCheckbox.checked = true;

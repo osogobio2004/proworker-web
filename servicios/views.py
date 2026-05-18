@@ -212,7 +212,7 @@ def catalogo(request):
     f_municipio = request.GET.get('municipio')
     
     if f_especialidad:
-        tecnicos = tecnicos.filter(especialidad=f_especialidad)
+        tecnicos = tecnicos.filter(especialidades__nombre=f_especialidad)
     if f_municipio:
         tecnicos = tecnicos.filter(municipio=f_municipio)
     
@@ -222,3 +222,17 @@ def catalogo(request):
 def detalle_tecnico(request, id):
     tecnico = PerfilTecnico.objects.get(id=id)
     return render(request, 'servicios/detalle_tecnico.html', {'tecnico': tecnico})
+
+@login_required(login_url='login')
+def agenda_tecnico(request):
+
+    if not request.user.is_staff and not request.user.is_superuser:
+        return redirect('index')
+    
+  
+    trabajos_aceptados = SolicitudServicio.objects.filter(estatus='Aceptado').order_by('fecha')
+    
+    contexto = {
+        'trabajos': trabajos_aceptados
+    }
+    return render(request, 'servicios/agenda_tecnico.html', contexto)

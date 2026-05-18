@@ -1,4 +1,3 @@
-/* Variables de Color de la Marca */
 :root {
     --color-fondo: #F5F5F7;      /* Gris hueso ultra-limpio estilo Apple */
     --color-primario: #2C3E50;   /* Gris oscuro corporativo */
@@ -6,7 +5,6 @@
     --color-exito: #34C759;      /* Verde suave institucional */
 }
 
-/* Tipografía e Identidad Visual */
 body {
     background-color: var(--color-fondo);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -21,7 +19,6 @@ main {
     flex: 1;
 }
 
-/* Contenedores y Tarjetas Estilo Apple */
 .card {
     border-radius: 16px !important;
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03) !important;
@@ -35,7 +32,6 @@ main {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08) !important;
 }
 
-/* Formularios Refinados */
 .form-control, .form-select {
     border-radius: 10px;
     border: 1px solid #D2D2D7;
@@ -50,7 +46,6 @@ main {
     background-color: #ffffff;
 }
 
-/* Botones con Bordes Suaves */
 .btn {
     border-radius: 10px;
     padding: 0.65rem 1.5rem;
