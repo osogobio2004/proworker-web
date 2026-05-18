@@ -1,5 +1,7 @@
+from urllib import request
+
 from django.shortcuts import render, redirect
-from .models import SolicitudServicio
+from .models import Especialidad, SolicitudServicio
 from django.contrib.auth.forms import UserCreationForm 
 from django.contrib import messages 
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
@@ -98,7 +100,37 @@ def historial_cliente(request):
 def editar_perfil(request):
     if not request.user.is_staff and not request.user.is_superuser:
         return redirect('index')
-    return render(request, 'servicios/editar_perfil.html', {'rol': ROL_ACTUAL})
+
+    perfil, created = PerfilTecnico.objects.get_or_create(usuario=request.user)
+
+    if request.method == 'POST':
+        perfil.telefono = request.POST.get('telefono', '')
+        perfil.municipio = request.POST.get('municipio', '')
+        perfil.presentacion = request.POST.get('presentacion', '')
+        
+        if 'foto_trabajo' in request.FILES:
+            perfil.foto_trabajo = request.FILES['foto_trabajo']
+            
+        perfil.save() # Guardamos los datos básicos primero
+
+        # 🟢 LÓGICA PARA MÚLTIPLES ESPECIALIDADES
+        # Atrapamos los IDs de todas las casillas que el técnico marcó en el HTML
+        ids_especialidades = request.POST.getlist('especialidades')
+        # Seteamos la lista en la tabla intermedia de la base de datos
+        perfil.especialidades.set(ids_especialidades)
+        
+        messages.success(request, '¡Tu oficina ha sido actualizada con éxito!')
+        return redirect('dashboard_tecnico')
+
+    # Para poder pintar los checkboxes en el HTML, necesitamos mandarle todas las opciones disponibles
+    all_especialidades = Especialidad.objects.all()
+    
+    contexto = {
+        'perfil': perfil,
+        'all_especialidades': all_especialidades
+    }
+    return render(request, 'servicios/editar_perfil.html', contexto)
+    
 
 @login_required(login_url='login')
 def dashboard_tecnico(request):
@@ -176,4 +208,19 @@ def catalogo(request):
     if request.user.is_staff:
         return redirect('dashboard_tecnico')
         
-    return render(request, 'servicios/catalogo.html')
+    tecnicos = PerfilTecnico.objects.all()
+    
+    f_especialidad = request.GET.get('especialidad')
+    f_municipio = request.GET.get('municipio')
+    
+    if f_especialidad:
+        tecnicos = tecnicos.filter(especialidad=f_especialidad)
+    if f_municipio:
+        tecnicos = tecnicos.filter(municipio=f_municipio)
+    
+    return render(request, 'servicios/catalogo.html', {'tecnicos': tecnicos})
+
+@login_required(login_url='login')
+def detalle_tecnico(request, id):
+    tecnico = PerfilTecnico.objects.get(id=id)
+    return render(request, 'servicios/detalle_tecnico.html', {'tecnico': tecnico})

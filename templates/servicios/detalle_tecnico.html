@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    body {
+        background-color: #F9F8F6; 
+    }
+    
+    .perfil-header {
+        background-color: #3E2723; /* Marrón chocolate */
+        padding: 4rem 0;
+        border-radius: 0 0 30px 30px;
+    }
+    
+    .foto-detalle {
+        width: 160px;
+        height: 160px;
+        object-fit: cover;
+        border: 6px solid #F9F8F6;
+        margin-top: -80px;
+        background-color: white;
+    }
+    
+    .tarjeta-info {
+        background-color: #FFFFFF;
+        border: 1px solid #EAE6DF;
+        border-radius: 12px;
+    }
+    
+    .etiqueta-lavanda {
+        background-color: #E6E6FA; /* Lavanda */
+        color: #3E2723;
+        font-weight: 600;
+        padding: 6px 18px;
+        border-radius: 20px;
+        font-size: 0.95rem;
+    }
+    
+    .texto-chocolate {
+        color: #3E2723;
+    }
+    
+    .btn-chocolate {
+        background-color: #3E2723;
+        color: #FFFFFF;
+        border-radius: 8px;
+        font-weight: 500;
+    }
+    
+    .btn-chocolate:hover {
+        background-color: #5D4037;
+        color: #FFFFFF;
+    }
+</style>
+
+<div class="perfil-header shadow-sm mb-5"></div>
+
+<div class="container pb-5" style="margin-top: -120px;">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            
+            {% if tecnico.usuario.perfil.foto_perfil %}
+                <img src="{{ tecnico.usuario.perfil.foto_perfil.url }}" class="rounded-circle shadow foto-detalle" style="object-fit: cover;">
+            {% else %}
+                <img src="/media/perfiles/default.png" class="rounded-circle shadow foto-detalle" style="object-fit: cover;">
+            {% endif %}
+            <h1 class="fw-bold mt-3 texto-chocolate">{{ tecnico.usuario.first_name }} {{ tecnico.usuario.last_name }}</h1>
+            <div class="d-flex flex-wrap gap-1 mt-2">
+                {% for esp in tecnico.especialidades.all %}
+                    <span class="badge bg-secondary text-white p-2" style="font-size: 0.8rem;">
+                        {{ esp.nombre }}
+                    </span>
+                {% empty %}
+                    <span class="text-muted small">Sin especialidades registradas</span>
+                {% endfor %}
+            </div>
+
+    <div class="row justify-content-center mt-2">
+        <div class="col-md-8">
+            
+            <div class="tarjeta-info p-4 p-md-5 shadow-sm mb-4">
+                <h4 class="texto-chocolate fw-bold mb-4"><i class="bi bi-person-vcard me-2"></i>Sobre mi trabajo</h4>
+                <p class="text-muted mb-0" style="line-height: 1.8; font-size: 1.05rem;">
+                    {% if tecnico.presentacion %}
+                        {{ tecnico.presentacion|linebreaks }}
+                    {% else %}
+                        Este profesional aún no ha agregado una descripción detallada a su perfil.
+                    {% endif %}
+                </p>
+            </div>
+
+            <div class="tarjeta-info p-4 p-md-5 shadow-sm text-center">
+                <h5 class="texto-chocolate fw-bold mb-4">¿Necesitas mis servicios?</h5>
+                <div class="d-flex flex-column flex-md-row gap-3 justify-content-center">
+                    <a href="{% url 'crear_solicitud' %}" class="btn btn-chocolate btn-lg px-4 fw-bold shadow-sm">
+                        <i class="bi bi-calendar-check me-2"></i>Agendar servicio
+                    </a>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="{% url 'catalogo' %}" class="btn btn-link text-decoration-none text-muted fw-semibold">
+                    <i class="bi bi-arrow-left me-1"></i>Volver al catálogo
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

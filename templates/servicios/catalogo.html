@@ -10,57 +10,62 @@
             <p class="text-muted small mb-0">Resultados localizados para mitigar gastos de traslado.</p>
         </div>
         <div class="col-md-8">
-            <form class="row g-2">
+            <form method="GET" action="{% url 'catalogo' %}" class="row gx-2 align-items-center">
                 <div class="col-md-5">
-                    <select class="form-select">
-                        <option>Todos los oficios</option>
-                        <option>Electricidad</option>
-                        <option>Fontanería</option>
-                        <option>Climatización</option>
-                        <option>Limpieza</option>
+                    <select name="especialidad" class="form-select border-primary shadow-sm">
+                        <option value="">Todos los oficios</option>
+                        <option value="Electricidad">Electricidad</option>
+                        <option value="Climatización">Climatización</option>
+                        <option value="Soporte IT">Soporte IT</option>
                     </select>
                 </div>
-                <div class="col-md-5">
-                    <select class="form-select">
-                        <option>Cualquier Municipio</option>
-                        <option>Centro (Villahermosa)</option>
-                        <option>Cárdenas</option>
-                        <option>Huimanguillo</option>
-                        <option>Comalcalco</option>
-                        <option>Emiliano Zapata</option>
-                        <option>Paraíso</option>
-                        <option>Macuspana</option>
-                        <option>Nacajuca</option>
-                        <option>Jalapa</option>
-                        <option>Jalpa de Méndez</option>
-                        <option>Balancán</option>
-                        <option>Centla</option>
-                        <option>Cunduacán</option>
-                        <option>Jonuta</option>
-                        <option>Tacotalpa</option>
-                        <option>Teapa</option>
-                        <option>Tenosique</option>
+                <div class="col-md-5 mt-3 mt-md-0">
+                    <select name="municipio" class="form-select border-primary shadow-sm">
+                        <option value="">Cualquier Municipio</option>
+                        <option value="Cárdenas">Cárdenas</option>
+                        <option value="Centro">Centro (Villahermosa)</option>
+                        <option value="Paraíso">Paraíso</option>
+                        <option value="Huimanguillo">Huimanguillo</option>
                     </select>
                 </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary w-100 shadow-sm fw-bold"><i class="bi bi-search me-1"></i> Buscar</button>
+                <div class="col-md-2 mt-3 mt-md-0">
+                    <button type="submit" class="btn btn-primary w-100 shadow-sm fw-bold">
+                        <i class="bi bi-search me-1"></i>Buscar
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 
-    <div class="row g-4">
-        <div class="col-md-4">
-            <div class="card text-center p-4 border shadow-sm">
-                <div class="mx-auto bg-light rounded-circle d-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                    <i class="bi bi-person-fill display-5 text-secondary"></i>
-                </div>
-                <h5 class="fw-bold mb-1 text-dark">Carlos Mendoza</h5>
-                <span class="badge bg-primary mb-2 px-3 py-1">Climatización</span>
-                <p class="text-muted small mb-3"><i class="bi bi-geo-alt-fill text-danger me-1"></i> Centro, Tabasco</p>
-                <a href="{% url 'perfil_tecnico' %}" class="btn btn-outline-primary btn-sm w-100 mt-2">Ver Perfil Técnico</a>
-            </div>
+    <div class="row">
+    
+    {% for tecnico in tecnicos %}
+    <div class="col-md-4 mb-4">
+        <div class="card text-center shadow-sm p-3 border-0">
+{% if tecnico.usuario.perfil.foto_perfil %}
+                <img src="{{ tecnico.usuario.perfil.foto_perfil.url }}" class="rounded-circle mx-auto mb-3" style="width: 80px; height: 80px; object-fit: cover;">
+            {% else %}
+                <img src="/media/perfiles/default.png" class="rounded-circle mx-auto mb-3" style="width: 80px; height: 80px; object-fit: cover;">
+            {% endif %}            
+            <h5 class="fw-bold">{{ tecnico.usuario.first_name }} {{ tecnico.usuario.last_name }}</h5>
+            <div class="d-flex flex-wrap gap-1 mt-2">
+                {% for esp in tecnico.especialidades.all %}
+                    <span class="badge bg-secondary text-white p-2" style="font-size: 0.8rem;">
+                        {{ esp.nombre }}
+                    </span>
+                {% empty %}
+                    <span class="text-muted small">Sin especialidades registradas</span>
+                {% endfor %}
+            </div>            
+            <p class="text-muted small"><i class="bi bi-telephone-fill text-danger me-1"></i> {{ tecnico.telefono }}</p>
+            <a href="{% url 'detalle_tecnico' tecnico.id %}" class="btn btn-outline-primary btn-sm w-100 mt-3">Ver perfil técnico</a>
         </div>
+    </div>
+    {% empty %}
+    <div class="col-12 text-center py-5">
+        <h4 class="text-muted">Aún no hay técnicos publicados en el catálogo.</h4>
+    </div>
+    {% endfor %}
     </div>
 </div>
 {% endblock %}

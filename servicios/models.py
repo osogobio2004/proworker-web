@@ -1,6 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
+class Especialidad(models.Model):
+    nombre = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nombre
 class Categoria(models.Model):
     nombre = models.CharField(max_length=100)
 
@@ -13,6 +19,7 @@ class PerfilTecnico(models.Model):
     telefono = models.CharField(max_length=15)
     experiencia = models.TextField(help_text="Breve descripción de los servicios.")
     foto_trabajo = models.ImageField(upload_to='trabajos_tecnicos/', null=True, blank=True)
+    especialidades = models.ManyToManyField(Especialidad, blank=True)
 
     def __str__(self):
         return self.usuario.username
@@ -37,3 +44,4 @@ class PerfilUsuario(models.Model):
 
     def __str__(self):
         return f"Perfil de {self.user.username}"
+    

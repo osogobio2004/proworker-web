@@ -69,7 +69,7 @@ class EditarPerfilForm(forms.ModelForm):
 
     class Meta:
         model = PerfilUsuario
-        fields = ['foto_perfil', 'biografia']
+        fields = ['foto_perfil']
 
     def __init__(self, *args, **kwargs):
         super(EditarPerfilForm, self).__init__(*args, **kwargs)

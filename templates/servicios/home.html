@@ -6,17 +6,17 @@
          style="height: 55vh; background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=1000&auto=format&fit=crop') center/cover;">
         <div class="container p-4">
             <h1 class="display-4 fw-bold mb-3 text-white">La red de confianza para servicios</h1>
-            <p class="lead mb-4 text-white-50">Conectamos profesionales verificados con tus necesidades en Tabasco.</p>
+            <p class="lead mb-4 text-white-50">Conectamos profesionales con tus necesidades en Tabasco.</p>
            <div class="mt-4">
-    {% if not request.user.is_authenticated %}
+   {% if not request.user.is_authenticated %}
         
-        <a href="{% url 'catalogo' %}" class="btn btn-primary btn-lg me-2 shadow-sm px-4">Buscar un Servicio</a>
-        <a href="{% url 'registro' %}" class="btn btn-outline-light btn-lg px-4">Soy Técnico</a>
+        <a href="{% url 'login' %}" class="btn btn-primary btn-lg me-2 shadow-sm px-4">Buscar un servicio</a>
+        <a href="{% url 'login' %}" class="btn btn-outline-light btn-lg px-4">Soy técnico</a>
 
     {% elif request.user.is_staff %}
         
         <a href="{% url 'dashboard_tecnico' %}" class="btn btn-success btn-lg me-2 shadow-sm px-4">
-            <i class="bi bi-speedometer2 me-2"></i>Ir a mi Bandeja
+            <i class="bi bi-speedometer2 me-2"></i>Ir a mi bandeja
         </a>
         <a href="{% url 'editar_perfil' %}" class="btn btn-outline-light btn-lg px-4">
             <i class="bi bi-person-lines-fill me-2"></i>Ofrecer mis servicios
@@ -25,10 +25,10 @@
     {% else %}
         
         <a href="{% url 'catalogo' %}" class="btn btn-primary btn-lg me-2 shadow-sm px-4">
-            <i class="bi bi-tools me-2"></i>Agendar Reparación
+            <i class="bi bi-tools me-2"></i>Agendar reparación
         </a>
         <a href="{% url 'historial_cliente' %}" class="btn btn-outline-light btn-lg px-4">
-            <i class="bi bi-journal-text me-2"></i>Mis Solicitudes
+            <i class="bi bi-journal-text me-2"></i>Mis solicitudes
         </a>
 
     {% endif %}
@@ -37,7 +37,7 @@
     </div>
 
     <div class="text-center mb-5">
-        <h2 class="fw-bold text-dark">Nuestros Servicios técnicos</h2>
+        <h2 class="fw-bold text-dark">Nuestros servicios técnicos</h2>
         <p class="text-muted">Profesionales capacitados en las áreas de mayor demanda en la región.</p>
     </div>
 
