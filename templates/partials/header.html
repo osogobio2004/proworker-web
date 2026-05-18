@@ -1,29 +1,25 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3 shadow-sm border-bottom border-secondary">
+<nav class="navbar navbar-expand-lg py-3" style="background-color: #FFFFFF; border-bottom: 1px solid var(--border-saas);">
     <div class="container">
-        <a class="navbar-brand fw-bold d-flex align-items-center" href="{% url 'index' %}">
-            <i class="bi bi-tools text-info me-2"></i> ProWorker
+        <a class="navbar-brand fw-bold d-flex align-items-center" href="{% url 'index' %}" style="color: var(--txt-main); font-size: 1.1rem; letter-spacing: -0.03em;">
+            <i class="bi bi-tools me-2" style="color: var(--blue-saas);"></i> ProWorker
         </a>
         
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPrincipal">
-            <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPrincipal">
+            <span class="navbar-toggler-icon" style="filter: invert(1) grayscale(100%) brightness(0); opacity: 0.5;"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarPrincipal">
             
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'index' %}">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'nosotros' %}">Nosotros</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
-                </li>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-1">
+                <li class="nav-item"><a class="nav-link px-3 py-1.5 small fw-medium" href="{% url 'index' %}" style="color: var(--txt-main);">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link px-3 py-1.5 small fw-medium" href="{% url 'nosotros' %}" style="color: var(--txt-muted);">Nosotros</a></li>
+                <li class="nav-item"><a class="nav-link px-3 py-1.5 small fw-medium" href="{% url 'contacto' %}" style="color: var(--txt-muted);">Contacto</a></li>
                 
                 {% if not request.user.is_staff %}
                 <li class="nav-item">
-                    <a class="nav-link text-warning fw-semibold" href="{% url 'catalogo' %}"><i class="bi bi-search me-1"></i>Catálogo</a>
+                    <a class="nav-link px-3 py-1.5 small fw-semibold" href="{% url 'catalogo' %}" style="color: var(--blue-saas);">
+                        <i class="bi bi-search me-1"></i>Catálogo
+                    </a>
                 </li>
                 {% endif %}
             </ul>
@@ -32,52 +28,61 @@
                 
                 {% if request.user.is_superuser %}
                     <li class="nav-item">
-                        <a class="btn btn-outline-danger btn-sm fw-bold shadow-sm" href="/admin/" target="_blank"><i class="bi bi-shield-lock me-1"></i>Panel admin</a>
+                        <a class="btn btn-sm fw-medium shadow-sm" href="/admin/" target="_blank" style="background-color: #FEE2E2; color: #DC2626; border-radius: 6px;">
+                            <i class="bi bi-shield-lock me-1"></i>Panel admin
+                        </a>
                     </li>
                 {% elif request.user.is_staff %}
-                    <li class="nav-item bg-dark rounded-3 px-2 py-1 border border-secondary d-flex gap-2">
-                        <a class="nav-link text-success p-1 small fw-bold" href="{% url 'dashboard_tecnico' %}"><i class="bi bi-speedometer2 me-1"></i>Bandeja de trabajo</a>
+                    <li class="nav-item">
+                        <a class="nav-link small fw-semibold" href="{% url 'dashboard_tecnico' %}" style="color: #16A34A; background-color: #DCFCE7; padding: 6px 12px; border-radius: 6px;">
+                            <i class="bi bi-speedometer2 me-1"></i>Bandeja de trabajo
+                        </a>
                     </li>
                 {% elif request.user.is_authenticated %}
-                    <li class="nav-item bg-dark rounded-3 px-2 py-1 border border-secondary d-flex gap-2">
-                        <a class="nav-link text-info p-1 small fw-bold" href="{% url 'historial_cliente' %}"><i class="bi bi-briefcase me-1"></i>Mis solicitudes</a>
+                    <li class="nav-item">
+                        <a class="nav-link small fw-semibold" href="{% url 'historial_cliente' %}" style="color: var(--blue-saas); background-color: var(--blue-soft); padding: 6px 12px; border-radius: 6px;">
+                            <i class="bi bi-briefcase me-1"></i>Mis solicitudes
+                        </a>
                     </li>
                 {% endif %}
 
-                <div class="d-none d-lg-block border-end border-secondary" style="height: 25px;"></div>
+                {% if request.user.is_authenticated %}
+                    <div class="d-none d-lg-block border-end" style="height: 24px; border-color: var(--border-saas) !important;"></div>
+                {% endif %}
 
                 {% if request.user.is_authenticated %}
                     <li class="nav-item dropdown">
-                        <button class="btn btn-outline-light dropdown-toggle border-0 d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown">
+                        <button class="btn d-flex align-items-center gap-2 px-3 py-1.5 shadow-sm" type="button" data-bs-toggle="dropdown" 
+                                style="border: 1px solid var(--border-saas); border-radius: var(--radius-saas); background: #FFFFFF; color: var(--txt-main); font-weight: 500; font-size: 0.85rem;">
                             
                             {% if request.user.perfil.foto_perfil %}
-                                <img src="{{ request.user.perfil.foto_perfil.url }}" class="rounded-circle" style="width: 30px; height: 30px; object-fit: cover;">
+                                <img src="{{ request.user.perfil.foto_perfil.url }}" class="rounded-circle" style="width: 24px; height: 24px; object-fit: cover;">
                             {% else %}
-                                <i class="bi bi-person-circle"></i>
+                                <img src="/media/perfiles/default.png" class="rounded-circle" style="width: 24px; height: 24px; object-fit: cover;">
                             {% endif %}
                             
                             {{ request.user.username }}
                         </button>
                         
-                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
-                            <li><h6 class="dropdown-header">Gestionar Cuenta</h6></li>
-                            <li><a class="dropdown-item" href="{% url 'mi_cuenta' %}"><i class="bi bi-gear me-2"></i>Mi Perfil</a></li>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 mt-2 p-2" style="border-radius: var(--radius-saas); border: 1px solid var(--border-saas) !important;">
+                            <li><h6 class="dropdown-header small text-uppercase fw-bold" style="color: var(--txt-muted);">Gestionar Cuenta</h6></li>
+                            <li><a class="dropdown-item py-2 rounded-2 small" href="{% url 'mi_cuenta' %}"><i class="bi bi-gear me-2"></i>Mi Perfil</a></li>
                             
                             {% if request.user.is_staff %}
-                                <li><a class="dropdown-item text-success" href="{% url 'dashboard_tecnico' %}"><i class="bi bi-speedometer2 me-2"></i>Panel Técnico</a></li>
-                                <li><a class="dropdown-item" href="{% url 'editar_perfil' %}"><i class="bi bi-shop me-2"></i>Mi Oficina</a></li>
+                                <li><a class="dropdown-item py-2 rounded-2 small text-success" href="{% url 'dashboard_tecnico' %}"><i class="bi bi-speedometer2 me-2"></i>Panel Técnico</a></li>
+                                <li><a class="dropdown-item py-2 rounded-2 small" href="{% url 'editar_perfil' %}"><i class="bi bi-shop me-2"></i>Mi Oficina</a></li>
                             {% else %}
-                                <li><a class="dropdown-item" href="{% url 'historial_cliente' %}"><i class="bi bi-card-list me-2"></i>Mis Pedidos</a></li>
+                                <li><a class="dropdown-item py-2 rounded-2 small" href="{% url 'historial_cliente' %}"><i class="bi bi-card-list me-2"></i>Mis Pedidos</a></li>
                             {% endif %}
                             
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item text-danger" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right me-2"></i>Salir</a></li>
+                            <li><hr class="dropdown-divider my-1" style="border-color: var(--border-saas);"></li>
+                            <li><a class="dropdown-item py-2 rounded-2 small text-danger" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right me-2"></i>Salir</a></li>
                         </ul>
                     </li>
                 {% else %}
                     <li class="nav-item d-flex align-items-center gap-2">
-                        <a class="btn btn-primary btn-sm text-white px-4 shadow-sm" href="{% url 'login' %}">Iniciar sesión</a>
-                        <a class="nav-link text-light small" href="{% url 'registro' %}">Registrarse</a>
+                        <a class="btn btn-sm px-3 small fw-medium" href="{% url 'login' %}" style="color: var(--txt-main);">Iniciar sesión</a>
+                        <a class="btn btn-sm px-4 text-white shadow-sm small fw-medium" href="{% url 'registro' %}" style="background-color: var(--blue-saas); border-radius: 6px;">Registrarse</a>
                     </li>
                 {% endif %}
 

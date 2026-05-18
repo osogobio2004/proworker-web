@@ -15,12 +15,12 @@ class Categoria(models.Model):
 
 class PerfilTecnico(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
-    categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True)
-    telefono = models.CharField(max_length=15)
-    experiencia = models.TextField(help_text="Breve descripción de los servicios.")
+    telefono = models.CharField(max_length=15, blank=True, null=True)
+    municipio = models.CharField(max_length=100, blank=True, null=True)
+    presentacion = models.TextField(blank=True, null=True)
+    
     foto_trabajo = models.ImageField(upload_to='trabajos_tecnicos/', null=True, blank=True)
     especialidades = models.ManyToManyField(Especialidad, blank=True)
-
     def __str__(self):
         return self.usuario.username
     

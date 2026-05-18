@@ -5,9 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}ProWorker | La red de confianza{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --bg-workspace: #F4F5F7;    
+        --bg-card: #FFFFFF;          
+        --txt-main: #111827;         
+        --txt-muted: #6B7280;        
+        --blue-saas: #2563EB;        
+        --blue-soft: #EFF6FF;        
+        --border-saas: #E5E7EB;      
+        --radius-saas: 10px;        
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--bg-workspace);
+        color: var(--txt-main);
+        letter-spacing: -0.02em;     
+    }
+
+    .saas-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-saas);
+        border-radius: var(--radius-saas);
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+</style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 

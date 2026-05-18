@@ -2,85 +2,63 @@
 {% block content %}
 
 <style>
-    body {
-        background-color: #F9F8F6; 
-    }
-    
-    .perfil-header {
-        background-color: #3E2723; /* Marrón chocolate */
-        padding: 4rem 0;
-        border-radius: 0 0 30px 30px;
-    }
-    
     .foto-detalle {
-        width: 160px;
-        height: 160px;
+        width: 120px;
+        height: 120px;
         object-fit: cover;
-        border: 6px solid #F9F8F6;
-        margin-top: -80px;
+        border: 4px solid #FFFFFF;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        margin-top: -60px;
         background-color: white;
     }
-    
-    .tarjeta-info {
-        background-color: #FFFFFF;
-        border: 1px solid #EAE6DF;
-        border-radius: 12px;
-    }
-    
-    .etiqueta-lavanda {
-        background-color: #E6E6FA; /* Lavanda */
-        color: #3E2723;
-        font-weight: 600;
-        padding: 6px 18px;
-        border-radius: 20px;
-        font-size: 0.95rem;
-    }
-    
-    .texto-chocolate {
-        color: #3E2723;
-    }
-    
-    .btn-chocolate {
-        background-color: #3E2723;
-        color: #FFFFFF;
-        border-radius: 8px;
+
+    .etiqueta-saas {
+        background-color: var(--blue-soft);
+        color: var(--blue-saas);
         font-weight: 500;
-    }
-    
-    .btn-chocolate:hover {
-        background-color: #5D4037;
-        color: #FFFFFF;
+        padding: 4px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        border: 1px solid rgba(37, 99, 235, 0.1);
     }
 </style>
 
-<div class="perfil-header shadow-sm mb-5"></div>
+<div style="background-color: #E5E7EB; height: 120px; width: 100%;"></div>
 
-<div class="container pb-5" style="margin-top: -120px;">
+<div class="container pb-5">
     <div class="row justify-content-center">
         <div class="col-md-8 text-center">
             
             {% if tecnico.usuario.perfil.foto_perfil %}
-                <img src="{{ tecnico.usuario.perfil.foto_perfil.url }}" class="rounded-circle shadow foto-detalle" style="object-fit: cover;">
+                <img src="{{ tecnico.usuario.perfil.foto_perfil.url }}" class="rounded-circle foto-detalle position-relative">
             {% else %}
-                <img src="/media/perfiles/default.png" class="rounded-circle shadow foto-detalle" style="object-fit: cover;">
+                <img src="/media/perfiles/default.png" class="rounded-circle foto-detalle position-relative">
             {% endif %}
-            <h1 class="fw-bold mt-3 texto-chocolate">{{ tecnico.usuario.first_name }} {{ tecnico.usuario.last_name }}</h1>
-            <div class="d-flex flex-wrap gap-1 mt-2">
+
+            <h2 class="fw-bold mt-3" style="color: var(--txt-main); letter-spacing: -0.03em;">
+                {{ tecnico.usuario.first_name }} {{ tecnico.usuario.last_name }}
+            </h2>
+            
+            <div class="mt-2 mb-3 d-flex justify-content-center align-items-center gap-2">
+                <span class="text-muted small fw-medium"><i class="bi bi-geo-alt-fill text-danger me-1"></i>{{ tecnico.municipio|default:"Municipio no especificado" }}</span>
+            </div>
+            
+            <div class="d-flex justify-content-center flex-wrap gap-2 mb-4">
                 {% for esp in tecnico.especialidades.all %}
-                    <span class="badge bg-secondary text-white p-2" style="font-size: 0.8rem;">
-                        {{ esp.nombre }}
-                    </span>
+                    <span class="etiqueta-saas">{{ esp.nombre }}</span>
                 {% empty %}
-                    <span class="text-muted small">Sin especialidades registradas</span>
+                    <span class="etiqueta-saas text-muted" style="background-color: #F3F4F6; border-color: #E5E7EB;">Sin especialidad</span>
                 {% endfor %}
             </div>
+        </div>
+    </div>
 
-    <div class="row justify-content-center mt-2">
+    <div class="row justify-content-center">
         <div class="col-md-8">
             
-            <div class="tarjeta-info p-4 p-md-5 shadow-sm mb-4">
-                <h4 class="texto-chocolate fw-bold mb-4"><i class="bi bi-person-vcard me-2"></i>Sobre mi trabajo</h4>
-                <p class="text-muted mb-0" style="line-height: 1.8; font-size: 1.05rem;">
+            <div class="saas-card p-4 p-md-5 mb-4">
+                <h5 class="fw-bold mb-3" style="color: var(--txt-main);">Sobre mi trabajo</h5>
+                <p class="mb-0" style="color: var(--txt-muted); line-height: 1.6; font-size: 0.95rem;">
                     {% if tecnico.presentacion %}
                         {{ tecnico.presentacion|linebreaks }}
                     {% else %}
@@ -89,18 +67,25 @@
                 </p>
             </div>
 
-            <div class="tarjeta-info p-4 p-md-5 shadow-sm text-center">
-                <h5 class="texto-chocolate fw-bold mb-4">¿Necesitas mis servicios?</h5>
+            <div class="saas-card p-4 text-center">
+                <h6 class="fw-bold mb-3" style="color: var(--txt-main);">¿Necesitas mis servicios?</h6>
                 <div class="d-flex flex-column flex-md-row gap-3 justify-content-center">
-                    <a href="{% url 'crear_solicitud' %}" class="btn btn-chocolate btn-lg px-4 fw-bold shadow-sm">
-                        <i class="bi bi-calendar-check me-2"></i>Agendar servicio
+                    
+                    {% if tecnico.telefono %}
+                    <a href="https://wa.me/52{{ tecnico.telefono }}" target="_blank" class="btn btn-outline-success px-4 fw-medium small shadow-sm" style="border-radius: var(--radius-saas);">
+                        <i class="bi bi-whatsapp me-2"></i>Contactar
+                    </a>
+                    {% endif %}
+                    
+                    <a href="{% url 'crear_solicitud' %}" class="btn text-white px-4 fw-medium small shadow-sm" style="background-color: var(--blue-saas); border-radius: var(--radius-saas);">
+                        <i class="bi bi-calendar-check me-2"></i>Agendar Servicio
                     </a>
                 </div>
             </div>
             
             <div class="text-center mt-4">
-                <a href="{% url 'catalogo' %}" class="btn btn-link text-decoration-none text-muted fw-semibold">
-                    <i class="bi bi-arrow-left me-1"></i>Volver al catálogo
+                <a href="{% url 'catalogo' %}" class="btn btn-link text-decoration-none small fw-medium" style="color: var(--txt-muted);">
+                    <i class="bi bi-arrow-left me-1"></i>Volver al Catálogo
                 </a>
             </div>
 

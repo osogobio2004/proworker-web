@@ -1,25 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container mt-4">
+<div class="container mt-5 mb-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card p-5 shadow-sm border-0">
-                <h3 class="fw-bold mb-4 text-center" style="color: var(--color-primario);">Mi oficina</h3>
-                <p class="text-muted text-center mb-4">Configura tu perfil profesional para recibir solicitudes locales.</p>
+            
+            <div class="saas-card p-4 p-md-5">
+                <div class="text-center mb-5">
+                    <h3 class="fw-bold" style="color: var(--txt-main); letter-spacing: -0.03em;">Configurar Oficina</h3>
+                    <p style="color: var(--txt-muted); font-size: 0.95rem;">Establece los detalles de tus servicios para que los clientes te encuentren.</p>
+                </div>
                 
                 <form method="POST" action="" enctype="multipart/form-data">
                     {% csrf_token %}
                     
                     <div class="mb-4">
-                        <label class="form-label fw-bold">Mis especialidades</label>
-                        <div class="row p-2 bg-light rounded border">
+                        <label class="form-label fw-semibold" style="color: var(--txt-main); font-size: 0.9rem;">Mis especialidades</label>
+                        <div class="row g-2 p-3" style="background-color: var(--bg-workspace); border-radius: var(--radius-saas); border: 1px solid var(--border-saas);">
                             {% for esp in all_especialidades %}
-                                <div class="col-md-6 mb-2">
+                                <div class="col-md-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="especialidades" value="{{ esp.id }}" id="esp_{{ esp.id }}"
+                                        <input class="form-check-input shadow-none" type="checkbox" name="especialidades" value="{{ esp.id }}" id="esp_{{ esp.id }}"
                                             {% if esp in perfil.especialidades.all %} checked {% endif %}>
-                                        <label class="form-check-input-label" for="esp_{{ esp.id }}">
+                                        <label class="form-check-label text-muted small fw-medium" for="esp_{{ esp.id }}">
                                             {{ esp.nombre }}
                                         </label>
                                     </div>
@@ -29,8 +32,8 @@
                     </div>
                     
                     <div class="mb-4">
-                        <label class="form-label fw-semibold">Municipio de cobertura principal</label>
-                        <select name="municipio" class="form-select">
+                        <label class="form-label fw-semibold" style="color: var(--txt-main); font-size: 0.9rem;">Municipio de cobertura principal</label>
+                        <select name="municipio" class="form-select shadow-none" style="border-color: var(--border-saas); border-radius: 8px; color: var(--txt-main); font-size: 0.95rem;">
                             <option value="Balancán" {% if perfil.municipio == "Balancán" %}selected{% endif %}>Balancán</option>
                             <option value="Cárdenas" {% if perfil.municipio == "Cárdenas" %}selected{% endif %}>Cárdenas</option>
                             <option value="Centla" {% if perfil.municipio == "Centla" %}selected{% endif %}>Centla</option>
@@ -51,17 +54,17 @@
                         </select>
                     </div>
                     
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold">Teléfono de enlace corporativo</label>
-                        <input type="tel" name="telefono" class="form-control" placeholder="Ej. 993XXXXXXX" value="{{ perfil.telefono|default:'' }}" required>
-                    </div>
-                    
                     <div class="mb-4">
-                        <label class="form-label fw-semibold">Presentación pública de tus servicios</label>
-                        <textarea name="presentacion" class="form-control" rows="4">{% if perfil.presentacion %}{{ perfil.presentacion }}{% endif %}</textarea>
+                        <label class="form-label fw-semibold" style="color: var(--txt-main); font-size: 0.9rem;">Teléfono de enlace corporativo</label>
+                        <input type="tel" name="telefono" class="form-control shadow-none" style="border-color: var(--border-saas); border-radius: 8px; color: var(--txt-main); font-size: 0.95rem;" placeholder="Ej. 993XXXXXXX" value="{{ perfil.telefono|default_if_none:'' }}" required>
                     </div>
                     
-                    <button type="submit" class="btn btn-primary w-100 fw-bold shadow-sm mt-3" style="background-color: #0071E3; border-color: #0071E3;">
+                    <div class="mb-5">
+                        <label class="form-label fw-semibold" style="color: var(--txt-main); font-size: 0.9rem;">Presentación pública de tus servicios</label>
+                        <textarea name="presentacion" class="form-control shadow-none" rows="5" style="border-color: var(--border-saas); border-radius: 8px; color: var(--txt-main); resize: none; font-size: 0.95rem;" placeholder="Describe tu experiencia, certificaciones y forma de trabajo...">{{ perfil.presentacion|default_if_none:'' }}</textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn w-100 text-white fw-medium py-2 shadow-sm" style="background-color: var(--blue-saas); border-radius: 8px;">
                         Guardar perfil profesional
                     </button>                
                 </form>

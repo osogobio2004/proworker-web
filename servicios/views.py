@@ -104,6 +104,7 @@ def editar_perfil(request):
     perfil, created = PerfilTecnico.objects.get_or_create(usuario=request.user)
 
     if request.method == 'POST':
+        print("🚀 DATOS RECIBIDOS DEL FORMULARIO:", request.POST)
         perfil.telefono = request.POST.get('telefono', '')
         perfil.municipio = request.POST.get('municipio', '')
         perfil.presentacion = request.POST.get('presentacion', '')
@@ -111,12 +112,9 @@ def editar_perfil(request):
         if 'foto_trabajo' in request.FILES:
             perfil.foto_trabajo = request.FILES['foto_trabajo']
             
-        perfil.save() # Guardamos los datos básicos primero
+        perfil.save() 
 
-        # 🟢 LÓGICA PARA MÚLTIPLES ESPECIALIDADES
-        # Atrapamos los IDs de todas las casillas que el técnico marcó en el HTML
         ids_especialidades = request.POST.getlist('especialidades')
-        # Seteamos la lista en la tabla intermedia de la base de datos
         perfil.especialidades.set(ids_especialidades)
         
         messages.success(request, '¡Tu oficina ha sido actualizada con éxito!')

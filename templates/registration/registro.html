@@ -1,30 +1,103 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card p-5 shadow-sm border-0">
-                <h3 class="fw-bold mb-4 text-center" style="color: var(--color-primario);">Registrar nueva cuenta</h3>
-                <form method="POST" action="">
-                    {% csrf_token %}
-                    {% for field in form %}
-                        <div class="mb-3 text-dark text-start">
-                            <label class="form-label fw-semibold small">{{ field.label }}</label>
-                            {{ field }}
-                            {% if field.help_text %}
-                                <div class="form-text small text-muted" style="font-size: 0.75rem;">{{ field.help_text }}</div>
-                            {% endif %}
-                            {% for error in field.errors %}
-                                <div class="text-danger small fw-bold">{{ error }}</div>
-                            {% endfor %}
-                        </div>
-                    {% endfor %}
-                    <button type="submit" class="btn btn-primary w-100 text-white fw-bold shadow-sm py-2 mt-2" style="background-color: #0071E3 !important; border-color: #0071E3 !important;">Completar registro</button>
-                </form>
-            </div>
+<style>
+    /* 🎨 MAGIA CSS: Obligamos a los campos por defecto de Django a verse modernos */
+    
+    .registro-container {
+        max-width: 520px;
+        margin: 0 auto;
+    }
+    
+    /* Estilo para las etiquetas (Labels) */
+    .registro-card form label {
+        font-weight: 600;
+        color: var(--txt-main);
+        font-size: 0.9rem;
+        margin-bottom: 0.4rem;
+        margin-top: 1.2rem;
+        display: block;
+    }
+
+    /* Estilo para las cajas de texto y menús desplegables */
+    .registro-card form input[type="text"],
+    .registro-card form input[type="email"],
+    .registro-card form input[type="password"],
+    .registro-card form input[type="number"],
+    .registro-card form select {
+        width: 100%;
+        padding: 0.65rem 0.8rem;
+        border: 1px solid var(--border-saas);
+        border-radius: 8px;
+        font-size: 0.95rem;
+        color: var(--txt-main);
+        background-color: var(--bg-card);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    /* Efecto al hacer clic en una caja (Aro azul) */
+    .registro-card form input:focus,
+    .registro-card form select:focus {
+        outline: none;
+        border-color: var(--blue-saas);
+        box-shadow: 0 0 0 3px var(--blue-soft);
+    }
+
+    /* Estilo para los textos de ayuda de Django ("Required. 150 characters...") */
+    .registro-card form .helptext {
+        font-size: 0.8rem;
+        color: var(--txt-muted);
+        display: block;
+        margin-top: 0.35rem;
+        line-height: 1.4;
+    }
+
+    /* Arreglamos la lista de requisitos de contraseña para que no se vea desordenada */
+    .registro-card form ul {
+        padding-left: 1.2rem;
+        margin-top: 0.4rem;
+        margin-bottom: 0;
+    }
+    
+    .registro-card form ul li {
+        font-size: 0.8rem;
+        color: var(--txt-muted);
+        margin-bottom: 0.2rem;
+    }
+
+    /* Mensajes de error en rojo si se equivocan en algo */
+    .registro-card form ul.errorlist li {
+        color: #DC2626;
+        font-weight: 500;
+        list-style-type: none;
+        margin-left: -1.2rem;
+        margin-top: 0.5rem;
+    }
+</style>
+
+<div class="container mt-5 mb-5 registro-container">
+    <div class="saas-card p-4 p-md-5 registro-card">
+        
+        <div class="text-center mb-4">
+            <h3 class="fw-bold" style="color: var(--txt-main); letter-spacing: -0.03em;">Crear una cuenta</h3>
+            <p style="color: var(--txt-muted); font-size: 0.95rem;">Únete a ProWorker y comienza hoy mismo.</p>
         </div>
+        
+        <form method="POST" action="">
+            {% csrf_token %}
+            
+            {{ form }}
+            
+            <button type="submit" class="btn w-100 text-white fw-medium py-2.5 mt-4 shadow-sm" style="background-color: var(--blue-saas); border-radius: 8px;">
+                Completar registro
+            </button>
+        </form>
+        
+        <div class="text-center mt-4 pt-4" style="border-top: 1px solid var(--border-saas);">
+            <p class="small mb-0" style="color: var(--txt-muted);">¿Ya tienes una cuenta? <a href="{% url 'login' %}" class="fw-semibold text-decoration-none" style="color: var(--blue-saas);">Inicia sesión aquí</a></p>
+        </div>
+        
     </div>
 </div>
-</main>
 {% endblock %}
