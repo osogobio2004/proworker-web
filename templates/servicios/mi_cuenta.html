@@ -1,39 +1,161 @@
 {% extends "base.html" %}
+
 {% block content %}
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow border-0 p-4">
-                <h2 class="fw-bold mb-4">Configuración de mi perfil</h2>
-                <form method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="row align-items-center mb-4">
-                        <div class="col-auto text-center">
-                            <img src="{{ request.user.perfil.foto_perfil.url }}" class="rounded-circle shadow" style="width: 120px; height: 120px; object-fit: cover; border: 4px solid #f8f9fa;">
-                        </div>
-                        <div class="col">
-                            <label class="form-label fw-bold">Cambiar foto de perfil</label>
-                            {{ form.foto_perfil }}
-                        </div>
+<style>
+    .perfil-container {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .saas-card form input[type="text"],
+    .saas-card form input[type="email"] {
+        width: 100%;
+        padding: 0.65rem 0.8rem;
+        border: 1px solid var(--border-saas, #E5E7EB);
+        border-radius: 8px;
+        font-size: 0.95rem;
+        color: var(--txt-main, #111827);
+        background-color: var(--bg-card, #FFFFFF);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .saas-card form input:focus {
+        outline: none;
+        border-color: var(--blue-saas, #2563EB);
+        box-shadow: 0 0 0 3px var(--blue-soft, #EFF6FF);
+    }
+
+    .saas-photo-management {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1.25rem;
+        border-radius: 10px;
+        background-color: var(--bg-workspace, #F4F5F7);
+        border: 1px solid var(--border-saas, #E5E7EB);
+    }
+
+    .photo-preview-large {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #FFFFFF;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+    }
+
+    .photo-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .django-photo-widget {
+        display: none;
+    }
+
+    /* Botón visual para cargar archivos */
+    .upload-trigger-btn {
+        background-color: #FFFFFF;
+        color: var(--txt-main, #111827);
+        font-size: 0.85rem;
+        font-weight: 500;
+        padding: 8px 16px;
+        border-radius: 8px;
+        border: 1px solid var(--border-saas, #E5E7EB);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .upload-trigger-btn:hover {
+        background-color: #F9FAFB;
+        border-color: #D1D5DB;
+    }
+
+    .clear-photo-label {
+        color: #DC2626; 
+        font-size: 0.8rem;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+</style>
+
+<div class="container mt-5 mb-5 perfil-container">
+    <div class="saas-card card border-0 p-4 p-md-5 shadow-sm" style="border-radius: 12px; border: 1px solid var(--border-saas, #E5E7EB);">
+        
+        <h3 class="fw-bold mb-4 text-center" style="color: var(--txt-main, #111827); letter-spacing: -0.03em;">Configuración de mi perfil</h3>
+        
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="mb-4">
+                <label class="form-label fw-semibold mb-3" style="color: var(--txt-main, #111827); font-size: 0.9rem;">Foto de perfil</label>
+                <div class="saas-photo-management">
+                    
+                    {% if request.user.perfil.foto_perfil %}
+                        <img src="{{ request.user.perfil.foto_perfil.url }}" class="photo-preview-large" alt="Mi foto">
+                    {% else %}
+                        <img src="/media/perfiles/default.png" class="photo-preview-large" alt="Foto por defecto">
+                    {% endif %}
+                    
+                    <div class="photo-actions">
+                        <button type="button" class="upload-trigger-btn" onclick="triggerFileInput();">
+                            <i class="bi bi-camera me-1"></i> Cambiar foto
+                        </button>
+                        
+                        {% if request.user.perfil.foto_perfil %}
+                            <span class="clear-photo-label" onclick="clearPhoto();">Quitar foto actual</span>
+                        {% endif %}
                     </div>
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold small text-uppercase text-muted">Nombre(s)</label>
-                            {{ form.first_name }}
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold small text-uppercase text-muted">Apellidos</label>
-                            {{ form.last_name }}
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label fw-bold small text-uppercase text-muted">Correo Electrónico</label>
-                            {{ form.email }}
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100 mt-4 py-2 fw-bold">Actualizar mis Datos</button>
-                </form>
+                </div>
+
+                <div class="django-photo-widget">
+                    {{ form.foto_perfil }}
+                </div>
             </div>
-        </div>
+
+            <div class="row g-3 mb-4 mt-2">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold small text-muted">NOMBRE(S)</label>
+                    {{ form.first_name }}
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-bold small text-muted">APELLIDOS</label>
+                    {{ form.last_name }}
+                </div>
+                <div class="col-12 mt-3">
+                    <label class="form-label fw-bold small text-muted">CORREO ELECTRÓNICO</label>
+                    {{ form.email }}
+                </div>
+            </div>
+
+            <button type="submit" class="btn w-100 text-white fw-medium py-2.5 shadow-sm mt-2" style="background-color: var(--blue-saas, #2563EB); border-radius: 8px;">
+                Actualizar mis datos
+            </button>
+        </form>
+
     </div>
 </div>
+
+<script>
+    function triggerFileInput() {
+        // Busca el input de archivo que Django genera y hace clic por ti
+        const fileInput = document.querySelector('input[type="file"][name="foto_perfil"]');
+        if (fileInput) {
+            fileInput.click();
+        }
+    }
+
+    function clearPhoto() {
+        // Busca el checkbox de borrado que Django genera y lo marca
+        const clearCheckbox = document.querySelector('input[type="checkbox"][name="foto_perfil-clear"]');
+        if (clearCheckbox) {
+            clearCheckbox.checked = true;
+            alert("Foto marcada para eliminar. Haz clic en 'Actualizar mis datos' para guardar los cambios.");
+        }
+    }
+</script>
 {% endblock %}
