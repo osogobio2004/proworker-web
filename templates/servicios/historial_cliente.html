@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h2 class="fw-bold mb-4" style="color: #2C3E50;">Mis Solicitudes de Servicio</h2>
+    <h2 class="fw-bold mb-4" style="color: #2C3E50;">Mis solicitudes de servicio</h2>
     
     <div class="row g-4">
         {% for solicitud in solicitudes %}
@@ -28,7 +28,7 @@
         {% empty %}
         <div class="col-12 text-center py-5">
             <i class="bi bi-calendar-x display-4 text-muted"></i>
-            <p class="text-muted mt-2">No tienes ninguna solicitud guardada en la base de datos todavía.</p>
+            <p class="text-muted mt-2">No tienes ninguna solicitud todavía.</p>
         </div>
         {% endfor %}
     </div>
