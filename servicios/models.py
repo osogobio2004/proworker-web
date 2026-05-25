@@ -33,6 +33,12 @@ class SolicitudServicio(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     cliente = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     estatus = models.CharField(max_length=20, default='Pendiente')
+    
+    ESTADO_TRABAJO_CHOICES = [
+        ('Pendiente', 'Pendiente'),
+        ('Terminado', 'Terminado'),
+    ]
+    estado_trabajo = models.CharField(max_length=20, choices=ESTADO_TRABAJO_CHOICES, default='Pendiente', null=True, blank=True)
 
     def __str__(self):
         return f"Cita para el {self.fecha} - {self.horario}"
@@ -44,4 +50,45 @@ class PerfilUsuario(models.Model):
 
     def __str__(self):
         return f"Perfil de {self.user.username}"
+ 
+class ProuestaReagendamiento(models.Model):
+    ESTATUS_CHOICES = [
+        ('Pendiente', 'Pendiente'),
+        ('Aceptado', 'Aceptado'),
+        ('Rechazado', 'Rechazado'),
+    ]
     
+    solicitud = models.ForeignKey(SolicitudServicio, on_delete=models.CASCADE, related_name='propuestas_reagendamiento')
+    tecnico = models.ForeignKey(User, on_delete=models.CASCADE, related_name='propuestas_reagendamiento')
+    nueva_fecha = models.DateField()
+    nuevo_horario = models.CharField(max_length=50)
+    motivo = models.TextField()
+    estatus = models.CharField(max_length=20, choices=ESTATUS_CHOICES, default='Pendiente')
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_respuesta = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):
+        return f"Reagendamiento de {self.solicitud.id} - {self.estatus}"
+
+    class Meta:
+        ordering = ['-fecha_creacion']
+
+class ConfirmacionTerminacion(models.Model):
+    ESTATUS_CHOICES = [
+        ('Pendiente', 'Pendiente'),
+        ('Aceptado', 'Aceptado'),
+        ('Rechazado', 'Rechazado'),
+    ]
+    
+    solicitud = models.ForeignKey(SolicitudServicio, on_delete=models.CASCADE, related_name='confirmaciones_terminacion')
+    tecnico = models.ForeignKey(User, on_delete=models.CASCADE, related_name='confirmaciones_terminacion')
+    estatus = models.CharField(max_length=20, choices=ESTATUS_CHOICES, default='Pendiente')
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_respuesta = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):
+        return f"Confirmación de {self.solicitud.id} - {self.estatus}"
+
+    class Meta:
+        ordering = ['-fecha_creacion']
+   

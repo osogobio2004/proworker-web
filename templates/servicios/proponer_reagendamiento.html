@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-light p-4 border-0">
+                    <h3 class="fw-bold mb-0" style="color: #2C3E50;">
+                        <i class="bi bi-calendar-event me-2"></i>Reagendar
+                    </h3>
+                    <p class="text-muted mt-2 mb-0">Proporciona una nueva fecha y explica brevemente por qué necesitas cambiar el horario</p>
+                </div>
+                
+                <div class="card-body p-4">
+                    <!-- Información de la Solicitud Original -->
+                    <div class="alert alert-info border-start border-info border-4 mb-4">
+                        <h6 class="fw-bold mb-3"><i class="bi bi-info-circle me-2"></i>Detalles del trabajo actual</h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-2">
+                                <small class="text-muted d-block"><strong>Descripción:</strong></small>
+                                <p class="text-dark mb-0">{{ solicitud.descripcion }}</p>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <small class="text-muted d-block"><strong>Cliente:</strong></small>
+                                <p class="text-dark mb-0">{{ solicitud.cliente.first_name }} {{ solicitud.cliente.last_name }}</p>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <small class="text-muted d-block"><strong>Fecha actual:</strong></small>
+                                <p class="text-dark mb-0">{{ solicitud.fecha }}</p>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <small class="text-muted d-block"><strong>Horario actual:</strong></small>
+                                <p class="text-dark mb-0">{{ solicitud.horario }}</p>
+                            </div>
+                            <div class="col-12 mb-0">
+                                <small class="text-muted d-block"><strong>Dirección:</strong></small>
+                                <p class="text-dark mb-0">{{ solicitud.direccion }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Formulario de Reagendamiento -->
+                    <form method="POST" novalidate>
+                        {% csrf_token %}
+                        
+                        <div class="mb-4">
+                            <label for="{{ formulario.nueva_fecha.id_for_label }}" class="form-label fw-bold">
+                                <i class="bi bi-calendar3 me-1"></i>{{ formulario.nueva_fecha.label }}
+                            </label>
+                            {{ formulario.nueva_fecha }}
+                            {% if formulario.nueva_fecha.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {{ formulario.nueva_fecha.errors }}
+                                </div>
+                            {% endif %}
+                            <small class="text-muted d-block mt-1">Selecciona una nueva fecha para el servicio</small>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="{{ formulario.nuevo_horario.id_for_label }}" class="form-label fw-bold">
+                                <i class="bi bi-clock me-1"></i>{{ formulario.nuevo_horario.label }}
+                            </label>
+                            {{ formulario.nuevo_horario }}
+                            {% if formulario.nuevo_horario.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {{ formulario.nuevo_horario.errors }}
+                                </div>
+                            {% endif %}
+                            <small class="text-muted d-block mt-1">Indica el nuevo horario (formato: HH:MM)</small>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="{{ formulario.motivo.id_for_label }}" class="form-label fw-bold">
+                                <i class="bi bi-chat-dots me-1"></i>{{ formulario.motivo.label }}
+                            </label>
+                            {{ formulario.motivo }}
+                            {% if formulario.motivo.errors %}
+                                <div class="alert alert-danger mt-2">
+                                    {{ formulario.motivo.errors }}
+                                </div>
+                            {% endif %}
+                            <small class="text-muted d-block mt-1">El cliente verá este motivo para entender tu propuesta</small>
+                        </div>
+                        
+                        <div class="d-flex gap-2 mt-5">
+                            <button type="submit" class="btn btn-primary btn-lg flex-grow-1">
+                                <i class="bi bi-send me-2"></i>Enviar propuesta al cliente
+                            </button>
+                            <a href="{% url 'agenda_tecnico' %}" class="btn btn-outline-secondary btn-lg">
+                                <i class="bi bi-x-lg"></i>Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control, .form-select {
+        border-radius: 8px;
+        border: 1px solid #dee2e6;
+        transition: all 0.3s ease;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    }
+    
+    .btn {
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+</style>
+{% endblock %}

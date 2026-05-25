@@ -4,17 +4,121 @@
 <div class="container mt-4">
     <h2 class="fw-bold mb-4" style="color: #2C3E50;">Mis solicitudes de servicio</h2>
     
+    <!-- Sección de Confirmaciones de Terminación Pendientes -->
+    {% if confirmaciones_terminacion_pendientes %}
+    <div class="alert mb-4" style="background-color: #E6F0FF; border: 4px solid #0066FF; border-left: 4px solid #0066FF !important; border-radius: 4px; padding: 1rem;">
+        <h5 class="alert-heading"><i class="bi bi-check-circle me-2"></i>Confirmación de trabajos terminados</h5>
+        <p class="mb-0">El técnico ha indicado que completó los siguientes trabajos. ¿Confirmas que está terminado?</p>
+    </div>
+    
+    <div class="row g-4 mb-5">
+        {% for confirmacion in confirmaciones_terminacion_pendientes %}
+        <div class="col-md-6">
+            <div class="card border-start border-4 p-4 shadow-sm bg-white" style="border-color: #0066FF !important;">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <span class="badge d-inline-flex align-items-center px-2 py-1" style="background-color: #3458cf; color: #ffffff; font-weight: 600;"><i class="bi bi-check-circle me-1"></i>Pendiente de confirmación</span>
+                    <small class="text-muted">{{ confirmacion.fecha_creacion|date:"d/m/Y H:i" }}</small>
+                </div>
+                
+                <hr class="text-muted my-2">
+                
+                <p class="small mb-2 text-secondary"><strong><i class="bi bi-file-text me-1"></i>Servicio:</strong></p>
+                <p class="text-dark fw-bold" style="font-size: 1rem;">{{ confirmacion.solicitud.descripcion }}</p>
+                
+                <div class="bg-light p-3 rounded mb-3 mt-3">
+                    <p class="small mb-1 text-secondary"><strong>📅 Fecha del servicio:</strong> {{ confirmacion.solicitud.fecha }}</p>
+                    <p class="small mb-1 text-secondary"><strong>⏰ Horario:</strong> {{ confirmacion.solicitud.horario }}</p>
+                    <p class="small mb-0 text-secondary"><strong>👨‍🔧 Técnico:</strong> {{ confirmacion.tecnico.first_name }} {{ confirmacion.tecnico.last_name }}</p>
+                </div>
+                
+                <p class="small mb-2 text-muted"><i class="bi bi-geo-alt-fill text-danger me-1"></i><strong>Dirección:</strong> {{ confirmacion.solicitud.direccion }}</p>
+                
+                <div class="d-flex gap-2 mt-4">
+                    <a href="{% url 'aceptar_terminacion' confirmacion.id %}" class="btn btn-success btn-sm flex-grow-1">
+                        <i class="bi bi-check-circle me-1"></i>Sí, está terminado
+                    </a>
+                    <a href="{% url 'rechazar_terminacion' confirmacion.id %}" class="btn btn-outline-danger btn-sm flex-grow-1">
+                        <i class="bi bi-x-circle me-1"></i>No, no está listo
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    <!-- Sección de Propuestas de Reagendamiento Pendientes -->
+    {% if propuestas_reagendamiento_pendientes %}
+    <div class="alert alert-info border-start border-info border-4 mb-4">
+        <h5 class="alert-heading"><i class="bi bi-exclamation-circle me-2"></i>Propuestas de reagendamiento</h5>
+        <p class="mb-0">Tienes propuestas de reagendamiento que necesitan tu aprobación o rechazo.</p>
+    </div>
+    
+    <div class="row g-4 mb-5">
+        {% for propuesta in propuestas_reagendamiento_pendientes %}
+        <div class="col-md-6">
+            <div class="card border-start border-info border-4 p-4 shadow-sm bg-white">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <span class="badge bg-info text-white px-2 py-1"><i class="bi bi-calendar-event me-1"></i>Propuesta de reagendamiento</span>
+                    <small class="text-muted">{{ propuesta.fecha_creacion|date:"d/m/Y" }}</small>
+                </div>
+                
+                <hr class="text-muted my-2">
+                
+                <p class="small mb-2 text-secondary"><strong><i class="bi bi-file-text me-1"></i>Descripción original:</strong></p>
+                <p class="text-dark" style="font-size: 0.95rem;">{{ propuesta.solicitud.descripcion }}</p>
+                
+                <div class="bg-light p-3 rounded mb-3 mt-3">
+                    <p class="small mb-1 text-secondary"><strong>📅 Nueva fecha propuesta:</strong> {{ propuesta.nueva_fecha }}</p>
+                    <p class="small mb-1 text-secondary"><strong>⏰ Nuevo horario:</strong> {{ propuesta.nuevo_horario }}</p>
+                    <p class="small mb-0 text-secondary"><strong>💬 Motivo:</strong></p>
+                    <p class="text-secondary fst-italic mt-1 mb-0">"{{ propuesta.motivo }}"</p>
+                </div>
+                
+                <p class="small mb-2 text-muted"><i class="bi bi-geo-alt-fill text-danger me-1"></i><strong>Dirección:</strong> {{ propuesta.solicitud.direccion }}</p>
+                
+                <div class="d-flex gap-2 mt-4">
+                    <a href="{% url 'aceptar_reagendamiento' propuesta.id %}" class="btn btn-success btn-sm flex-grow-1">
+                        <i class="bi bi-check-circle me-1"></i>Aceptar
+                    </a>
+                    <a href="{% url 'rechazar_reagendamiento' propuesta.id %}" class="btn btn-outline-danger btn-sm flex-grow-1">
+                        <i class="bi bi-x-circle me-1"></i>Rechazar
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    <!-- Sección de Solicitudes Regulares -->
+    <h5 class="fw-bold mt-5 mb-3" style="color: #2C3E50;">Todas mis solicitudes</h5>
+    
     <div class="row g-4">
         {% for solicitud in solicitudes %}
         <div class="col-md-6">
             <div class="card border-start border-primary border-4 p-4 shadow-sm bg-white">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div>
                 {% if solicitud.estatus == 'Pendiente' %}
-                    <span class="badge bg-warning text-dark border border-warning px-2 py-1 align-self-start mb-2"><i class="bi bi-hourglass-split me-1"></i>Pendiente de revisión</span>
+                            <span class="badge bg-warning text-dark border border-warning px-2 py-1"><i class="bi bi-hourglass-split me-1"></i>Pendiente de revisión</span>
                 {% elif solicitud.estatus == 'Aceptado' %}
-                    <span class="badge bg-success border border-success px-2 py-1 align-self-start mb-2"><i class="bi bi-check-circle-fill me-1"></i>¡Trabajo Aceptado!</span>
+                            <span class="badge bg-success border border-success px-2 py-1"><i class="bi bi-check-circle-fill me-1"></i>¡Trabajo Aceptado!</span>
+                            {% if solicitud.estado_trabajo == 'Pendiente' %}
+                                <span class="badge ms-2" style="background-color: #FFB703; color: #023047; border: 1px solid #FFB703; text-dark">
+                                    <i class="bi bi-circle-fill" style="font-size: 0.5rem; margin-right: 0.35rem;"></i>Pendiente
+                                </span>
+                            {% elif solicitud.estado_trabajo == 'Terminado' %}
+                                <span class="badge ms-2 bg-success">
+                                    <i class="bi bi-circle-fill" style="font-size: 0.5rem; margin-right: 0.35rem;"></i>Terminado
+                                </span>
+                            {% endif %}
                 {% elif solicitud.estatus == 'Rechazado' %}
-                    <span class="badge bg-danger border border-danger px-2 py-1 align-self-start mb-2"><i class="bi bi-x-circle-fill me-1"></i>Técnico no disponible</span>
+                            <span class="badge bg-danger border border-danger px-2 py-1"><i class="bi bi-x-circle-fill me-1"></i>Técnico no disponible</span>
                 {% endif %}
+                    </div>
+                    <small class="text-muted">{{ solicitud.fecha_creacion|date:"d/m/Y" }}</small>
+                </div>
                 <h5 class="fw-bold mt-2 text-dark">{{ solicitud.descripcion }}</h5>
                 <hr class="text-muted my-2">
                 <p class="small mb-1 text-secondary"><strong><i class="bi bi-calendar-event me-1"></i>Fecha:</strong> {{ solicitud.fecha }}</p>

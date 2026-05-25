@@ -19,4 +19,11 @@ urlpatterns = [
     path('mi-cuenta/', views.mi_cuenta, name='mi_cuenta'),
     path('tecnico/<int:id>/', views.detalle_tecnico, name='detalle_tecnico'),
     path('agenda/', views.agenda_tecnico, name='agenda_tecnico'),
+    path('proponer-reagendamiento/<int:id>/', views.proponer_reagendamiento, name='proponer_reagendamiento'),
+    path('aceptar-reagendamiento/<int:id>/', views.aceptar_reagendamiento, name='aceptar_reagendamiento'),
+    path('rechazar-reagendamiento/<int:id>/', views.rechazar_reagendamiento, name='rechazar_reagendamiento'),
+    path('marcar-terminado/<int:id>/', views.marcar_trabajo_terminado, name='marcar_trabajo_terminado'),
+    path('aceptar-terminacion/<int:id>/', views.aceptar_terminacion, name='aceptar_terminacion'),
+    path('rechazar-terminacion/<int:id>/', views.rechazar_terminacion, name='rechazar_terminacion'),
+
 ]

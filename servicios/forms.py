@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import PerfilUsuario
+from .models import PerfilUsuario, ProuestaReagendamiento
 
 class FormularioRegistroCustom(UserCreationForm):
     nombre_completo = forms.CharField(
@@ -77,3 +77,34 @@ class EditarPerfilForm(forms.ModelForm):
             self.fields['first_name'].initial = self.instance.user.first_name
             self.fields['last_name'].initial = self.instance.user.last_name
             self.fields['email'].initial = self.instance.user.email
+            
+class FormularioReagendamiento(forms.ModelForm):
+    nueva_fecha = forms.DateField(
+        widget=forms.DateInput(attrs={
+            'type': 'date',
+            'class': 'form-control'
+        }),
+        label='Nueva fecha'
+    )
+    
+    nuevo_horario = forms.CharField(
+        max_length=50,
+        widget=forms.TextInput(attrs={
+            'type': 'time',
+            'class': 'form-control'
+        }),
+        label='Nuevo horario'
+    )
+    
+    motivo = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'class': 'form-control',
+            'rows': 4,
+            'placeholder': 'Describe brevemente por qué no puedes asistir a la fecha programada...'
+        }),
+        label='Motivo de reagendamiento'
+    )
+
+    class Meta:
+        model = ProuestaReagendamiento
+        fields = ['nueva_fecha', 'nuevo_horario', 'motivo']
