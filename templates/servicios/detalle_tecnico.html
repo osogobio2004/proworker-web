@@ -78,19 +78,56 @@
                     {% endif %}
                     
                     <a href="{% url 'crear_solicitud' %}" class="btn text-white px-4 fw-medium small shadow-sm" style="background-color: var(--blue-saas); border-radius: var(--radius-saas);">
-                        <i class="bi bi-calendar-check me-2"></i>Agendar Servicio
+                        <i class="bi bi-calendar-check me-2"></i>Agendar servicio
                     </a>
                 </div>
             </div>
             
             <div class="text-center mt-4">
                 <a href="{% url 'catalogo' %}" class="btn btn-link text-decoration-none small fw-medium" style="color: var(--txt-muted);">
-                    <i class="bi bi-arrow-left me-1"></i>Volver al Catálogo
+                    <i class="bi bi-arrow-left me-1"></i>Volver al catálogo
                 </a>
             </div>
 
         </div>
     </div>
+    <div class="mt-5 mb-5">
+    <h4 class="fw-bold mb-4" style="color: #2C3E50;">
+        <i class="bi bi-chat-heart text-danger me-2"></i>Reseñas de clientes
+    </h4>
+    
+    {% if tecnico.usuario.resenas_recibidas.all %}
+        <div class="row g-3">
+            {% for resena in tecnico.usuario.resenas_recibidas.all %}
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm p-4 h-100" style="border-radius: 12px; background-color: #FAFAFA;">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <strong class="text-dark">
+                                <i class="bi bi-person-circle text-secondary me-1"></i> 
+                                {{ resena.cliente.first_name }} {{ resena.cliente.last_name }}
+                            </strong>
+                            <span class="badge bg-warning text-dark border border-warning" style="font-size: 0.85rem;">
+                                {{ resena.calificacion }} <i class="bi bi-star-fill"></i>
+                            </span>
+                        </div>
+                        <p class="small mt-2 mb-0 text-secondary fst-italic" style="line-height: 1.5;">
+                            "{{ resena.comentario|default:'El cliente no dejó comentario escrito, pero calificó el servicio.' }}"
+                        </p>
+                        <hr class="text-muted my-2 opacity-25">
+                        <small class="text-muted" style="font-size: 0.75rem;">
+                            Publicado el {{ resena.fecha_creacion|date:"d de F, Y" }}
+                        </small>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-light border text-center p-4" style="border-radius: 12px;">
+            <i class="bi bi-stars text-warning" style="font-size: 2rem;"></i>
+            <p class="mb-0 mt-2 text-muted">Este técnico es nuevo y aún no tiene reseñas. ¡Sé el primero en contratarlo y calificar su trabajo!</p>
+        </div>
+    {% endif %}
+</div>
 </div>
 
 {% endblock %}

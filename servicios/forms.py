@@ -108,3 +108,13 @@ class FormularioReagendamiento(forms.ModelForm):
     class Meta:
         model = ProuestaReagendamiento
         fields = ['nueva_fecha', 'nuevo_horario', 'motivo']
+    
+class FormularioReagendamiento(forms.ModelForm):
+    class Meta:
+        model = ProuestaReagendamiento
+        fields = ['nueva_fecha', 'nuevo_horario', 'motivo']
+        widgets = {
+            'nueva_fecha': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'nuevo_horario': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
+            'motivo': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+        }

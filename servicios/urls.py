@@ -8,7 +8,6 @@ urlpatterns = [
     path('about/', views.about, name='nosotros'),
     path('contact/', views.contact, name='contacto'),
     path('catalogo/', views.catalogo, name='catalogo'),
-    path('tecnico-detalle/', views.perfil_tecnico, name='perfil_tecnico'),
     path('solicitar/', views.crear_solicitud, name='crear_solicitud'),
     path('mis-servicios/', views.historial_cliente, name='historial_cliente'),
     path('mi-perfil/', views.editar_perfil, name='editar_perfil'),
@@ -25,5 +24,5 @@ urlpatterns = [
     path('marcar-terminado/<int:id>/', views.marcar_trabajo_terminado, name='marcar_trabajo_terminado'),
     path('aceptar-terminacion/<int:id>/', views.aceptar_terminacion, name='aceptar_terminacion'),
     path('rechazar-terminacion/<int:id>/', views.rechazar_terminacion, name='rechazar_terminacion'),
-
+    path('dejar-resena/<int:id>/', views.dejar_resena, name='dejar_resena'),
 ]

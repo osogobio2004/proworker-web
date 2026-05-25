@@ -2,7 +2,51 @@
 
 {% block content %}
 <div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div class="row mb-5 mt-2">
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100" style="background-color: #E6F0FF; border-left: 5px solid #0066FF !important; border-radius: 10px;">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-muted fw-bold mb-1" style="font-size: 0.85rem; text-transform: uppercase;">Trabajos disponibles</h6>
+                                <h2 class="fw-bold mb-0" style="color: #0066FF;">{{ pendientes_count }}</h2>
+                            </div>
+                            <div class="p-3 rounded-circle bg-white shadow-sm d-flex justify-content-center align-items-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-briefcase-fill text-primary fs-5"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mt-3 mt-md-0">
+                    <div class="card border-0 shadow-sm h-100" style="background-color: #FFFBEB; border-left: 5px solid #F59E0B !important; border-radius: 10px;">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-muted fw-bold mb-1" style="font-size: 0.85rem; text-transform: uppercase;">Mi Calificación</h6>
+                                <h2 class="fw-bold mb-0" style="color: #D97706;">
+                                    {{ promedio_estrellas }} 
+                                </h2>
+                            </div>
+                            <div class="p-3 rounded-circle bg-white shadow-sm d-flex justify-content-center align-items-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-star-fill text-warning fs-5"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mt-3 mt-md-0">
+                    <div class="card border-0 shadow-sm h-100" style="background-color: #F3F4F6; border-left: 5px solid #6B7280 !important; border-radius: 10px;">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-muted fw-bold mb-1" style="font-size: 0.85rem; text-transform: uppercase;">Reseñas Recibidas</h6>
+                                <h2 class="fw-bold mb-0 text-dark">{{ total_resenas }}</h2>
+                            </div>
+                            <div class="p-3 rounded-circle bg-white shadow-sm d-flex justify-content-center align-items-center" style="width: 50px; height: 50px;">
+                                <i class="bi bi-chat-text-fill text-secondary fs-5"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <div>
             <h2 class="fw-bold mb-0" style="color: var(--color-primario);">Bandeja operativa de trabajo</h2>
             <p class="text-muted mb-0"><i class="bi bi-circle-fill text-success small me-1"></i> {{ request.user.get_full_name }}   </p>
